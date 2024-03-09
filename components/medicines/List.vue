@@ -24,6 +24,10 @@
       </CardContent>
     </div>
   </div>
+
+  <CardFooter>
+    <Button variant="outline" class="w-full hover:bg-red-500">{{ $t('buttons.edit') }}</Button>
+  </CardFooter>
 </Card>
 </template>
 

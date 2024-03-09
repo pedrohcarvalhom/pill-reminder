@@ -11,5 +11,12 @@
   },
   "medicines": {
     "toTake": "Remédios a tomar"
+  },
+  "buttons": {
+    "add": "Adicionar",
+    "remove": "Excluir",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "edit": "Editar"
   }
 }
