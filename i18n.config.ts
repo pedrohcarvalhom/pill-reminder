@@ -1,4 +1,4 @@
-import pt from './locales/pt.json'
+import pt from './locales/pt-BR.json'
 import en from './locales/en.json'
 
 export default defineI18nConfig(() => ({
