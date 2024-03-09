@@ -1,7 +1,16 @@
 <template lang="pug">
-button(class="inline-flex flex-col items-center justify-center rounded-3xl bg-gray-100 p-6 w-10 h-18")
-  span(class="font-bold text-black text-xl") {{ props.day }}
-  span(class="text-gray-500 text-sm") {{ parseWeekDay(props.weekDay) }}
+button(
+  class="inline-flex flex-col items-center justify-center rounded-3xl p-6 w-10 h-18"
+  :class="{'bg-blue-400': props.isToday, 'bg-gray-200': !props.isToday}"
+)
+  span(
+    class="font-bold text-black text-xl"
+    :class="{'text-white': props.isToday, 'text-gray-800': !props.isToday}"
+  ) {{ props.day }}
+  span(
+    class="text-gray-500 text-sm"
+    :class="{'text-white': props.isToday, 'text-gray-800': !props.isToday}"
+  ) {{ parseWeekDay(props.weekDay) }}
 </template>
 
 <script setup lang="ts">
@@ -16,6 +25,10 @@ const props = defineProps({
   weekDay: {
     type: Number,
     required: true
+  },
+  isToday: {
+    type: Boolean,
+    default: false
   }
 })
 

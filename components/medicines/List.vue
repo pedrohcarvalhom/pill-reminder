@@ -1,5 +1,5 @@
 <template>
-<Card class="mx-2 rounded-3xl bg-gray-100">
+<Card class="mx-4 rounded-3xl bg-gray-100">
   <div class="flex items-center ml-3">
     <div class="flex-none w-14 h-14 bg-blue-400 rounded-lg">
     </div>

@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="w-full mt-8 py-5 px-2 flex justify-between")
-  dates-button(v-for="date in thisWeekDates" :key="date.day" :day="date.day" :week-day="date.weekDay")
+  dates-button(v-for="date in thisWeekDates" :key="date.day" :is-today="date.day === new Date().getDate()" :day="date.day" :week-day="date.weekDay")
 </template>
 
 <script setup lang="ts">
