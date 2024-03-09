@@ -8,5 +8,8 @@
     "friday": "Sex",
     "saturday": "Sáb",
     "sunday": "Dom"
+  },
+  "medicines": {
+    "toTake": "Remédios a tomar"
   }
 }

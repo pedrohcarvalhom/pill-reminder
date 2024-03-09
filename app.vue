@@ -4,8 +4,8 @@ header
 main
   dates-list
   hr.my-4
-  span This week
-  medicines-list
+  span(class="text-2xl ml-2") {{ $t('medicines.toTake') }}
+  medicines-list.mt-4
 </template>
 
 
