@@ -1,11 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", '@nuxtjs/eslint-module', '@nuxtjs/i18n', 'shadcn-nuxt'],
+  modules: ["@nuxtjs/tailwindcss", '@nuxtjs/color-mode', '@nuxtjs/eslint-module', '@nuxtjs/i18n', 'shadcn-nuxt'],
   i18n: {
     vuei18n: './i18n.config.ts',
     locales: ['pt', 'en'],
     defaultLocale: 'pt',
+  },
+  colorMode: {
+    classSuffix: ''
   },
   shadcn: {
     /**
@@ -17,5 +20,5 @@ export default defineNuxtConfig({
      * @default "./components/ui"
      */
     componentDir: './components/ui'
-  }
+  },
 })
