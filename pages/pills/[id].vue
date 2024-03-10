@@ -1,7 +1,8 @@
 <template lang="pug">
 main
   header(class="mb-10")
-    Icon(class="w-8 h-8 text-red-500" name="ri:arrow-left-line")
+    nuxt-link(to="/")
+      Icon(class="w-8 h-8 text-red-500" name="ri:arrow-left-line")
   div.mx-4
     div(class="w-20 h-20 rounded-full bg-red-500")
     div(class="flex items-center justify-between my-8")
