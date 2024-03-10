@@ -10,9 +10,12 @@ main
         span(class="text-lg font-medium") Tipo do remedio - 20mg
       div
         Icon(class="w-8 h-8" name="emojione:pencil")
-    div(class="flex gap-2")
+    div(class="flex gap-2 mb-4")
       pills-measure
       pills-time
+    span(class="text-lg font-bold text-black") {{ $t('pills.schedule') }}
+    div.mt-2
+      pills-schedule
 </template>
 
 <script setup lang="ts">

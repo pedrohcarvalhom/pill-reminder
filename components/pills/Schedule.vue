@@ -1,15 +1,17 @@
 <template lang="pug">
-Card
-  CardContent
-    div(class="flex")
-      div
-        span(class="flex gap-2 items-center text-lg text-gray-800 font-medium")
-        Icon(name="twemoji:alarm-clock")
-      div(class="flex")
-        span 20:00
-        span 3x ao dia
+Card(class="w-full bg-gray-100 shadow-lg")
+  CardContent(class="flex flex-col py-2")
+    div(class="flex justify-between my-3")
+      label(class="text-red-500 font-bold"  for="terms2") 10:00 AM
+      Checkbox(id="terms2" class="rounded-full")
+    div(class="flex justify-between my-3")
+      label(class="text-red-500 font-bold" for="terms2") 12:00 AM
+      Checkbox(id="terms2" class="rounded-full")
+    div(class="flex justify-between my-3")
+      label(class="text-red-500 font-bold" for="terms2") 14:00 AM
+      Checkbox(id="terms2" class="rounded-full")
 </template>
 
 <script setup lang="ts">
-
+import { Checkbox } from '../ui/checkbox';
 </script>

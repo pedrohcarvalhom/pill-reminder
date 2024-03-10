@@ -18,5 +18,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "edit": "Edit"
+  },
+  "pills": {
+    "schedule": "Schedule"
   }
 }

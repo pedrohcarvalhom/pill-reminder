@@ -18,5 +18,8 @@
     "save": "Salvar",
     "cancel": "Cancelar",
     "edit": "Editar"
+  },
+  "pills": {
+    "schedule": "Cronograma"
   }
 }
