@@ -1,11 +1,11 @@
 <template>
-<Card class="mx-4 rounded-3xl bg-gray-100">
+<Card class="mx-4 rounded-3xl bg-gray-200 dark:bg-gray-200">
   <div class="flex items-center ml-3">
     <div class="flex-none w-14 h-14 bg-blue-400 rounded-lg">
     </div>
     <div class="flex-1">
       <CardHeader>
-        <CardTitle class="text-2xl">
+        <CardTitle class="text-2xl dark:text-gray-950">
           {{ medicine.name }}, {{ medicine.amount }} {{ medicine.measure }}
         </CardTitle>
       </CardHeader>
@@ -26,7 +26,7 @@
   </div>
 
   <CardFooter>
-    <Button variant="outline" class="w-full hover:bg-red-500">{{ $t('buttons.edit') }}</Button>
+    <Button variant="outline" class="w-full hover:bg-red-500" @click="goToEdit">{{ $t('buttons.edit') }}</Button>
   </CardFooter>
 </Card>
 </template>
@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
+const router = useRouter();
 const medicine = ref({
   name: "Dipirona",
   amount: 10,
@@ -42,4 +43,8 @@ const medicine = ref({
   time: "12:00 AM",
   measure: "mg"
 })
+
+function goToEdit() {
+  router.push('/pills/1')
+}
 </script>

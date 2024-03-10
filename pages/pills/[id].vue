@@ -2,7 +2,7 @@
 main
   header(class="mb-10")
     nuxt-link(to="/")
-      Icon(class="w-8 h-8 text-red-500" name="ri:arrow-left-line")
+      Icon(class="w-8 h-8 text-red-500 ml-2 my-1" name="ri:arrow-left-line")
   div.mx-4
     div(class="w-20 h-20 rounded-full bg-red-500")
     div(class="flex items-center justify-between my-8")
@@ -14,7 +14,7 @@ main
     div(class="flex gap-2 mb-4")
       pills-measure
       pills-time
-    span(class="text-lg font-bold text-black") {{ $t('pills.schedule') }}
+    span(class="text-lg font-bold text-black dark:text-white") {{ $t('pills.schedule') }}
     div.mt-2
       pills-schedule
 </template>

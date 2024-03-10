@@ -1,6 +1,6 @@
 <template lang="pug">
 label(class="text-red-500 font-bold" :for="id.toString()") {{ props.label }}
-Checkbox(:id="id.toString()" class="rounded-full")
+Checkbox(:id="id.toString()" class="rounded-full dark:bg-gray-500 checked:text-green-500")
 </template>
 <script setup lang="ts">
 import { Checkbox } from '../ui/checkbox';

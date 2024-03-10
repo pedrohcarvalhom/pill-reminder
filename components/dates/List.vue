@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="w-full mt-8 py-5 px-2 flex justify-between")
-  dates-button(v-for="date in thisWeekDates" :key="date.day" :is-today="date.day === new Date().getDate()" :day="date.day" :week-day="date.weekDay")
+  dates-button(v-for="date in thisWeekDates" :key="date.day" :is-today="isToday(date)" :day="date.day" :week-day="date.weekDay")
 </template>
 
 <script setup lang="ts">
@@ -13,7 +13,6 @@ const thisWeekDates = ref(getThisWeekDates());
 function getThisWeekDates(): DateItem[] {
   const week= [];
   const current = new Date();
-  current.setDate((current.getDate() - current.getDay() +1));
 
   for (let i = 0; i < 7; i++) {
     week.push(new Date(current));
@@ -25,5 +24,9 @@ function getThisWeekDates(): DateItem[] {
       weekDay: date.getDay(),
     }
   })
+}
+
+function isToday(current: DateItem) {
+  return current.day === new Date().getDate()
 }
 </script>

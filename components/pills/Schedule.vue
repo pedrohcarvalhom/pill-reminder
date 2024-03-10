@@ -1,5 +1,5 @@
 <template lang="pug">
-Card(class="w-full bg-gray-100 shadow-lg")
+Card(class="w-full bg-gray-100 shadow-lg dark:bg-gray-100")
   CardContent(class="flex flex-col py-2")
     div(v-for="hour in hours" :key="hour.id" class="flex justify-between my-3")
       checkbox-label(:id="hour.id" :label="hour.label")
