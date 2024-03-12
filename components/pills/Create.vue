@@ -36,6 +36,7 @@
           <FormControl>
             <Input type="time" v-bind="componentField" />
           </FormControl>
+          <FormDescription>{{ $t('pills.form.timeDescription') }}</FormDescription>
           <FormMessage />
         </FormItem>
       </FormField>
@@ -57,7 +58,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
+  FormDescription
 } from '@/components/ui/form'
 
 const { t } = useI18n();

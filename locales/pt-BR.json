@@ -30,7 +30,8 @@
       "measure": "Unidade de medida",
       "measureError": "Por favor, digite a unidade de medida",
       "time": "Horário",
-      "timeError": "Por favor, digite o horário"
+      "timeError": "Por favor, digite o horário",
+      "timeDescription": "Você poderá adicionar mais horários depois"
     }
   }
 }

@@ -30,7 +30,8 @@
       "measure": "Measurement unit",
       "measureError": "Please enter the measurement unit",
       "time": "Time to take",
-      "timeError": "Please enter the time to take"
+      "timeError": "Please enter the time to take",
+      "timeDescription": "You can add more times later"
     }
   }
 }
