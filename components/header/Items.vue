@@ -1,31 +1,14 @@
 <template>
-  <NavigationMenu>
-    <NavigationMenuList>
-      <NavigationMenuItem>
-        <NavigationMenuTrigger>
-          <Icon class="h-8 w-8" name="flat-color-icons:settings" />
-        </NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <ul class="grid gap-3 p-4">
-            <li>
-              <NavigationMenuLink>
-                <span class="ml-2">Configurações</span>
-              </NavigationMenuLink>
-            </li>
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  </NavigationMenu>
+  <div class="card flex justify-content-center">
+    <PrimeSidebar v-model:visible="visible" position="right" header="Sidebar">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.</p>
+    </PrimeSidebar>
+    <Icon class="w-6 h-6" name="flat-color-icons:settings" @click="visible = true" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
+const visible = ref(false)
 </script>
