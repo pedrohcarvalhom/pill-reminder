@@ -20,6 +20,16 @@
     "edit": "Edit"
   },
   "pills": {
-    "schedule": "Schedule"
+    "schedule": "Schedule",
+    "form": {
+      "name": "Pill name",
+      "nameError": "Please enter the name of the pill",
+      "quantity": "Quantity (for each day)",
+      "quantityError": "Please enter the quantity of pills",
+      "measure": "Measurement unit",
+      "measureError": "Please enter the measurement unit",
+      "time": "Time to take",
+      "timeError": "Please enter the time to take"
+    }
   }
 }

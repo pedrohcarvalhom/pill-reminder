@@ -1,9 +1,13 @@
 <template>
   <div class="card flex justify-content-center">
-    <PrimeSidebar v-model:visible="visible" position="right" header="Sidebar">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.</p>
+    <PrimeSidebar v-model:visible="visible" position="right" header="Pill Reminder">
+      <div class="h-full flex">
+        <PrimeMenu :model="items" :pt="{ root: ({ }) => { return 'border-none h-full' } }">
+          <template #submenuheader="{ item }">
+            <span class="font-bold">{{ item.label }}</span>
+          </template>
+        </PrimeMenu>
+      </div>
     </PrimeSidebar>
     <Icon class="w-6 h-6" name="flat-color-icons:settings" @click="visible = true" />
   </div>
@@ -11,4 +15,18 @@
 
 <script setup lang="ts">
 const visible = ref(false)
+
+const items = ref([
+  {
+    label: 'Remédios',
+    items: [
+      {
+        label: 'Adicionar',
+      },
+      {
+        label: 'Editar',
+      }
+    ]
+  },
+]);
 </script>

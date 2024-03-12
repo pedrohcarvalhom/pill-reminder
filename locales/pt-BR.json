@@ -20,6 +20,16 @@
     "edit": "Editar"
   },
   "pills": {
-    "schedule": "Cronograma"
+    "schedule": "Cronograma",
+    "form": {
+      "name": "Nome do remédio",
+      "nameError": "Por favor, digite o nome do remédio",
+      "quantity": "Quantidade (por dia)",
+      "quantityError": "Por favor, digite a quantidade de remédios",
+      "measure": "Unidade de medida",
+      "measureError": "Por favor, digite a unidade de medida",
+      "time": "Horário",
+      "timeError": "Por favor, digite o horário"
+    }
   }
 }
