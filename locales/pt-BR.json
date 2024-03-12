@@ -22,6 +22,7 @@
   "pills": {
     "schedule": "Cronograma",
     "form": {
+      "title": "Adicionar remédio",
       "name": "Nome do remédio",
       "nameError": "Por favor, digite o nome do remédio",
       "quantity": "Quantidade (por dia)",

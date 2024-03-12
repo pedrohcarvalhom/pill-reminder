@@ -22,6 +22,7 @@
   "pills": {
     "schedule": "Schedule",
     "form": {
+      "title": "Add pill",
       "name": "Pill name",
       "nameError": "Please enter the name of the pill",
       "quantity": "Quantity (for each day)",

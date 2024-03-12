@@ -1,8 +1,10 @@
 <template>
-  <PrimeDialog v-model:visible="isRegisteringPill" modal :style="{ width: '90vw' }">
+  <PrimeDialog v-model:visible="isRegisteringPill" modal :style="{ width: '90vw' }"
+    :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+    <span class="text-xl font-bold mb-4">{{ $t('pills.form.title') }}</span>
     <form @submit="onSubmit">
       <FormField v-slot="{ componentField }" name="name">
-        <FormItem>
+        <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.name') }}</FormLabel>
           <FormControl>
             <Input v-bind="componentField" />
@@ -10,17 +12,8 @@
           <FormMessage />
         </FormItem>
       </FormField>
-      <FormField v-slot="{ componentField }" name="quantity">
-        <FormItem>
-          <FormLabel>{{ $t('pills.form.quantity') }}</FormLabel>
-          <FormControl>
-            <Input type="number" v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
       <FormField v-slot="{ componentField }" name="measure">
-        <FormItem>
+        <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.measure') }}</FormLabel>
           <FormControl>
             <PillsMeasureSelect v-bind="componentField" />
@@ -28,8 +21,17 @@
           <FormMessage />
         </FormItem>
       </FormField>
+      <FormField v-slot="{ componentField }" name="quantity">
+        <FormItem class="mt-4">
+          <FormLabel>{{ $t('pills.form.quantity') }}</FormLabel>
+          <FormControl>
+            <Input type="number" v-bind="componentField" />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
       <FormField v-slot="{ componentField }" name="hour">
-        <FormItem>
+        <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.time') }}</FormLabel>
           <FormControl>
             <Input type="time" v-bind="componentField" />

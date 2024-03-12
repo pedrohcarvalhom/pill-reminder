@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const selectedMeasure = defineModel({ default: 'mg', type: String });
+const selectedMeasure = defineModel({ default: '', type: String });
 const cities = ref([
   { name: 'Mg', code: 'mg' },
   { name: 'Grama', code: 'gr' },
