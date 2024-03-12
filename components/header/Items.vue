@@ -4,7 +4,7 @@
       <div class="h-full flex">
         <PrimeMenu :model="items" :pt="{ root: ({ }) => { return 'border-none h-full' } }">
           <template #submenuheader="{ item }">
-            <span class="font-bold">{{ item.label }}</span>
+            <span class="font-bold mr-4">{{ item.label }}</span>
           </template>
         </PrimeMenu>
       </div>
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 const visible = ref(false)
-
+const colorMode = useColorMode()
 const items = ref([
   {
     label: 'Remédios',
@@ -25,6 +25,23 @@ const items = ref([
       },
       {
         label: 'Editar',
+      }
+    ]
+  },
+  {
+    label: 'Tema',
+    items: [
+      {
+        label: 'Claro',
+        command: () => {
+          colorMode.preference = 'light'
+        }
+      },
+      {
+        label: 'Escuro',
+        command: () => {
+          colorMode.preference = 'dark'
+        }
       }
     ]
   },
