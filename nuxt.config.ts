@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     components: {
       prefix: 'Prime',
       include: '*',
-      exclude: ['Galleria', 'Carousel']
+      exclude: ['Galleria', 'Carousel', 'Editor', 'Chart']
     },
     cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities'
   },
