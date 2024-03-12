@@ -1,6 +1,6 @@
 <template lang="pug">
 header
-  header-navigation
+  header-navigation()
 main
   dates-list
   hr.my-4
@@ -11,5 +11,7 @@ main
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 
+const isSidebarOpen = ref(false)
+const animatedheader = ref<HTMLElement | null>(null)
 const { t } = useI18n();
 </script>
