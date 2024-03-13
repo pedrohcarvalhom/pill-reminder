@@ -1,21 +1,20 @@
 <template>
   <header>
-    <header-navigation />
-    <main>
-      <dates-list />
-      <hr />.my-4
-      <div class="flex justify-between items-center">
-        <span class="text-2xl ml-4 font-bold"> {{ $t('medicines.toTake') }}
-          <a class="mr-6 mt-1 text-red-500 font-bold" @click="isRegisteringPill = !isRegisteringPill">
-            <icon class="w-5 h-5 mr-1" name="ion:add-circle" />
-            <span> {{ $t('buttons.add') }} </span>
-          </a>
-        </span>
-      </div>
-      <medicines-list class="mt-4" />
-      <pills-create @update:model-value="isRegisteringPill = $event" />
-    </main>
+    <HeaderNavigation />
   </header>
+  <main>
+    <DatesList />
+    <hr class="my-4">
+    <div class="flex justify-between items-center">
+      <span class="text-2xl ml-4 font-bold"> {{ $t('medicines.toTake') }} </span>
+      <Button @click="isRegisteringPill = true" variant="ghost" class="mr-6 mt-1 text-red-500 font-bold">
+        <icon class="w-5 h-5 mr-1" name="ion:add-circle" />
+        <span class="text-sm"> {{ $t('buttons.add') }} </span>
+      </Button>
+    </div>
+    <MedicinesList class="mt-4" />
+    <PillsCreate v-model="isRegisteringPill" />
+  </main>
 </template>
 
 <script setup lang="ts">

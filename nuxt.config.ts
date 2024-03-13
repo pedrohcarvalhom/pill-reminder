@@ -37,14 +37,5 @@ export default defineNuxtConfig({
       cookieRedirect: false
     }
   },
-  vite: {
-    vue: {
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.includes('-')
-        }
-      }
-    }
-  },
   css: ['primevue/resources/themes/aura-light-pink/theme.css']
 })

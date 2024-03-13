@@ -38,6 +38,8 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
+const router = useRouter()
+const supabase = useSupabaseClient();
 const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
   email: z.string({ required_error: t('register.form.emailError') }).email(),
@@ -49,6 +51,17 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: values.email,
+    password: values.password
+  })
+
+  if (error && error.status === 400) {
+    window.alert('Email ou senha inválidos')
+    return;
+  }
+
+  router.push('/')
 })
 
 defineEmits(['dontHaveAccount'])
