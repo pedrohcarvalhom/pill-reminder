@@ -33,5 +33,17 @@
       "timeError": "Por favor, digite o horário",
       "timeDescription": "Você poderá adicionar mais horários depois"
     }
+  },
+  "register": {
+    "name": "Crie sua conta",
+    "form": {
+      "title": "Cadastrar",
+      "email": "Email",
+      "name": "Nome",
+      "nameError": "Nome é obrigatório",
+      "emailError": "Por favor, digite um email",
+      "password": "Senha",
+      "passwordError": "Por favor, digite uma senha"
+    }
   }
 }

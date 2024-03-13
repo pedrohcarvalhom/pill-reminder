@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     'nuxt-icon',
     'nuxt-primevue',
+    '@nuxtjs/supabase'
   ],
   i18n: {
     vueI18n: './i18n.config.ts',
@@ -28,6 +29,22 @@ export default defineNuxtConfig({
       exclude: ['Galleria', 'Carousel', 'Editor', 'Chart']
     },
     cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities'
+  },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      cookieRedirect: false
+    }
+  },
+  vite: {
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes('-')
+        }
+      }
+    }
   },
   css: ['primevue/resources/themes/aura-light-pink/theme.css']
 })

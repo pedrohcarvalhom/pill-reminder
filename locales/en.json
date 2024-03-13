@@ -33,5 +33,17 @@
       "timeError": "Please enter the time to take",
       "timeDescription": "You can add more times later"
     }
+  },
+  "register": {
+    "name": "Create your account",
+    "form": {
+      "title": "Register",
+      "email": "Email",
+      "name": "Name",
+      "nameError": "Name is mandatory",
+      "emailError": "Please enter an email",
+      "password": "Password",
+      "passwordError": "Please enter a password"
+    }
   }
 }
