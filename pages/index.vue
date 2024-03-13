@@ -1,6 +1,6 @@
 <template lang="pug">
 header
-  header-navigation()
+  header-navigation
 main
   dates-list
   hr.my-4
