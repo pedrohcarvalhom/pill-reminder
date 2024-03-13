@@ -62,8 +62,8 @@ import {
   FormDescription
 } from '@/components/ui/form'
 
+const isRegisteringPill = ref(false)
 const { t } = useI18n();
-const isRegisteringPill = defineModel({ default: false, type: Boolean })
 const formSchema = toTypedSchema(z.object({
   name: z.string({ required_error: t('pills.form.nameError') }).min(2).max(50),
   quantity: z.number({ required_error: t('pills.form.quantityError') }).positive(),
@@ -78,4 +78,10 @@ const form = useForm({
 const onSubmit = form.handleSubmit((values) => {
   console.log('Form submitted!', values)
 })
+
+watch(isRegisteringPill, () => {
+  emit('update:model-value', isRegisteringPill.value)
+})
+
+const emit = defineEmits(['update:model-value'])
 </script>
