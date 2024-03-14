@@ -37,7 +37,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import { useUserStore } from '~/store/user'
 
+const userStore = useUserStore();
 const router = useRouter()
 const supabase = useSupabaseClient();
 const { t } = useI18n();
@@ -51,25 +53,53 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
+  const { data, error } = await loginSupabase(values)
+  const { data: user, error: apiError } = await loginApi(values)
+
+  if (error?.message == 'Email not confirmed') {
+    window.alert('Por favor confirme seu email')
+    return
+  }
+
+  if (error || apiError.value) {
+    window.alert('Email ou senha inválidos')
+    return;
+  }
+
+  if (!user.value || !data.session) {
+    window.alert('Não foi possível definir o usuário. Recarregue a página.')
+    return;
+  }
+
+  userStore.setUser({
+    email: user.value.user!.email,
+    id: user.value.user!.id,
+    name: user.value.user!.name
+  })
+
+  userStore.setUserAuthorization(user.value.user!.email!, data.session.access_token!)
+
+  router.push('/')
+})
+
+async function loginSupabase(values: { email: string, password: string }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: values.email,
     password: values.password
   });
 
-  const { data: user } = await useFetch('/api/user', {
+  return { data, error }
+}
+
+async function loginApi(values: { email: string, password: string }) {
+  const { data, error } = await useFetch('/api/user', {
     method: 'GET',
     query: {
-      email: data.user?.email
+      email: values.email
     }
   })
-
-  if (error && error.status === 400) {
-    window.alert('Email ou senha inválidos')
-    return;
-  }
-
-  router.push('/')
-})
+  return { data, error }
+}
 
 defineEmits(['dontHaveAccount'])
 </script>

@@ -60,35 +60,47 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   const { name, email, password } = values
+  const { supabaseError } = await signUpToSupabase({ name, email, password })
+  const { apiError } = await registerUser({ name, email })
 
-  try {
-    await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        emailRedirectTo: 'http://localhost:3000/login',
-        data: {
-          name: name
-        }
-      },
-    });
-    await $fetch('/api/user', {
-      method: 'POST',
-      body: {
-        name: name,
-        email: email
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-
-    window.alert("Usuário criado com sucesso!")
-    emit('haveAccount')
-  } catch (error) {
-    console.error(error)
+  if (supabaseError || apiError.value) {
+    window.alert("Erro ao registrar usuário. Verifique os dados e tente novamente.")
+    return;
   }
+
+  window.alert("Usuário criado com sucesso!")
+  emit('haveAccount')
 })
+
+async function signUpToSupabase({ name, email, password }: { name: string, email: string, password: string }) {
+  const { data, error: supabaseError } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      emailRedirectTo: 'http://localhost:3000/login',
+      data: {
+        full_name: name
+      }
+    },
+  });
+
+  return { data, supabaseError }
+}
+
+async function registerUser({ name, email }: { name: string, email: string }) {
+  const { data, error: apiError } = await useFetch('/api/user', {
+    method: 'POST',
+    body: {
+      name: name,
+      email: email
+    },
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+
+  return { data, apiError }
+}
 
 const emit = defineEmits(['haveAccount'])
 </script>

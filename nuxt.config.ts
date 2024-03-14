@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     'nuxt-icon',
     'nuxt-primevue',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    '@pinia/nuxt'
   ],
   i18n: {
     vueI18n: './i18n.config.ts',
@@ -36,6 +37,9 @@ export default defineNuxtConfig({
       callback: '/confirm',
       cookieRedirect: false
     }
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
   css: ['primevue/resources/themes/aura-light-pink/theme.css']
 })
