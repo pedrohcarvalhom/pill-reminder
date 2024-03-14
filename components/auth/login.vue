@@ -92,12 +92,13 @@ async function loginSupabase(values: { email: string, password: string }) {
 }
 
 async function loginApi(values: { email: string, password: string }) {
-  const { data, error } = await useFetch('/api/user', {
+  const { data, error } = useAsyncData('user', async () => await $fetch('/api/user', {
     method: 'GET',
     query: {
       email: values.email
     }
-  })
+  }))
+
   return { data, error }
 }
 

@@ -88,7 +88,7 @@ async function signUpToSupabase({ name, email, password }: { name: string, email
 }
 
 async function registerUser({ name, email }: { name: string, email: string }) {
-  const { data, error: apiError } = await useFetch('/api/user', {
+  const { error: apiError } = useAsyncData('user', async () => await $fetch('/api/user', {
     method: 'POST',
     body: {
       name: name,
@@ -97,9 +97,9 @@ async function registerUser({ name, email }: { name: string, email: string }) {
     headers: {
       'Content-Type': 'application/json'
     },
-  })
+  }))
 
-  return { data, apiError }
+  return { apiError }
 }
 
 const emit = defineEmits(['haveAccount'])
