@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
@@ -53,33 +53,43 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
-  const { data, error } = await loginSupabase(values)
-  const { data: user, error: apiError } = await loginApi(values)
+  try {
+    const { data, error: supabaseError } = await loginSupabase(values)
+    const { user } = await loginApi(values)
 
-  if (error?.message == 'Email not confirmed') {
-    window.alert('Por favor confirme seu email')
-    return
+    if (supabaseError?.message == 'Email not confirmed') {
+      window.alert('Por favor confirme seu email')
+      return
+    }
+
+    if (!user) {
+      window.alert('Usuário não encontrado')
+      return;
+    }
+
+    if (supabaseError?.status) {
+      window.alert('Email ou senha inválidos')
+      return;
+    }
+
+    if (!user || !data.session) {
+      window.alert('Não foi possível definir o usuário. Recarregue a página.')
+      return;
+    }
+
+    userStore.setUser({
+      email: user.email,
+      id: user.id,
+      name: user.name
+    })
+
+    userStore.setUserAuthorization(user.email!, data.session.access_token!)
+    router.push('/')
+  } catch (error) {
+    if (error instanceof Error) {
+      window.alert(error.message)
+    }
   }
-
-  if (error || apiError.value) {
-    window.alert('Email ou senha inválidos')
-    return;
-  }
-
-  if (!user.value || !data.session) {
-    window.alert('Não foi possível definir o usuário. Recarregue a página.')
-    return;
-  }
-
-  userStore.setUser({
-    email: user.value.user!.email,
-    id: user.value.user!.id,
-    name: user.value.user!.name
-  })
-
-  userStore.setUserAuthorization(user.value.user!.email!, data.session.access_token!)
-
-  router.push('/')
 })
 
 async function loginSupabase(values: { email: string, password: string }) {
@@ -92,14 +102,14 @@ async function loginSupabase(values: { email: string, password: string }) {
 }
 
 async function loginApi(values: { email: string, password: string }) {
-  const { data, error } = useAsyncData('user', async () => await $fetch('/api/user', {
+  const { user } = await $fetch('/api/user', {
     method: 'GET',
     query: {
       email: values.email
     }
-  }))
+  })
 
-  return { data, error }
+  return { user }
 }
 
 defineEmits(['dontHaveAccount'])

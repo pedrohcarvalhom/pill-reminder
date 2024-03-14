@@ -17,6 +17,13 @@ export default defineEventHandler(async (event) => {
     }
   })
 
+  if (!user) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Usuário não encontrado',
+    })
+  }
+
   setResponseStatus(event, 200)
 
   return {

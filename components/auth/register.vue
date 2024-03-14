@@ -63,8 +63,14 @@ const onSubmit = form.handleSubmit(async (values) => {
   const { supabaseError } = await signUpToSupabase({ name, email, password })
   const { apiError } = await registerUser({ name, email })
 
-  if (supabaseError || apiError.value) {
-    window.alert("Erro ao registrar usuário. Verifique os dados e tente novamente.")
+  if (apiError.value?.statusCode == 409) {
+    window.alert(apiError.value.statusMessage)
+    return;
+  } else if (supabaseError) {
+    window.alert("Ocorreu um erro ao criar o usuário. Tente novamente")
+    return;
+  } else if (apiError.value) {
+    window.alert("Ocorreu um erro ao salvar o usuário. Tente novamente")
     return;
   }
 

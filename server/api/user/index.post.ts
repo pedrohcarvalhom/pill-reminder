@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client"
 import prisma from "../../client"
 
 export default defineEventHandler(async (event) => {
@@ -10,12 +11,24 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await prisma.user.create({
-    data: {
-      name: body.name,
-      email: body.email,
+  try {
+    await prisma.user.create({
+      data: {
+        name: body.name,
+        email: body.email,
+      }
+    })
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002') {
+        throw createError({
+          statusCode: 409,
+          statusMessage: 'Email ja existe',
+        })
+      }
     }
-  })
+    throw error
+  }
 
   setResponseStatus(event, 200)
 })
