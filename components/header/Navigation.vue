@@ -3,10 +3,10 @@
     <Avatar>
       <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
       <AvatarFallback>
-        <span class="text-2xl font-medium mr-4"> {{ $t('Welcome') }}</span>
-        <HeaderItems />
       </AvatarFallback>
     </Avatar>
+    <span class="text-2xl font-medium mr-4"> {{ $t('Welcome') }}</span>
+    <HeaderItems />
   </div>
 </template>
 

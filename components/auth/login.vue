@@ -54,6 +54,13 @@ const onSubmit = form.handleSubmit(async (values) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: values.email,
     password: values.password
+  });
+
+  const { data: user } = await useFetch('/api/user', {
+    method: 'GET',
+    query: {
+      email: data.user?.email
+    }
   })
 
   if (error && error.status === 400) {

@@ -1,3 +1,17 @@
+# Relação do banco de dados
+
+Pill
+- Nome
+- Quantidade (2 pilulas, 3 bagas)
+- Medida (Grama, Miligrama, Kg)
+- Horario (String[])
+- Usuário ID
+
+User
+- Id
+- Email
+- Name
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

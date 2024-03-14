@@ -7,3 +7,20 @@ generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native", "darwin-arm64"]
 }
+
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  name  String
+  Pill  Pill[]
+}
+
+model Pill {
+  id       Int      @id @default(autoincrement())
+  name     String
+  quantity Int
+  measure  String
+  hours    String[]
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int
+}

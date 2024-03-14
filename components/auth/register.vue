@@ -60,10 +60,9 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   const { name, email, password } = values
-  console.log(values)
 
   try {
-    const { data, error } = await supabase.auth.signUp({
+    await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
@@ -72,7 +71,18 @@ const onSubmit = form.handleSubmit(async (values) => {
           name: name
         }
       },
+    });
+    await $fetch('/api/user', {
+      method: 'POST',
+      body: {
+        name: name,
+        email: email
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
+
     window.alert("Usuário criado com sucesso!")
     emit('haveAccount')
   } catch (error) {
