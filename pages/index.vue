@@ -12,11 +12,48 @@
         <span class="text-sm"> {{ $t('buttons.add') }} </span>
       </Button>
     </div>
-    <MedicinesList class="mt-4" />
+    <div class="overflow-auto h-full">
+      <MedicinesList v-if="isLoaded" class="mt-4" />
+      <span v-else class="h-[50vh] flex justify-center items-center"> {{ $t('medicines.loading') }}</span>
+    </div>
     <PillsCreate v-model="isRegisteringPill" />
   </main>
 </template>
 
 <script setup lang="ts">
+import type { Pill } from '@prisma/client';
+import { usePillStore } from '~/store/pill';
+import { useUserStore } from '~/store/user';
+
 const isRegisteringPill = ref(false)
+const { isLoaded, email } = storeToRefs(useUserStore());
+const pillStore = usePillStore();
+const nuxt = useNuxtApp();
+
+await useFetch('/api/pills', {
+  method: 'GET',
+  query: { email },
+  watch: [isLoaded],
+  responseType: 'json',
+  onResponse: (res) => {
+    if (res.error) {
+      window.alert(res.error.message)
+      return
+    }
+
+    const pills = res.response._data.pills as Pill[];
+    pillStore.setPills(pills);
+  },
+  getCachedData(key) {
+    const data = nuxt.isHydrating ? nuxt.payload.data[key] : nuxt.static.data[key];
+
+    if (!data) {
+      console.log('No data found in cache for key:', key);
+      return
+    } else {
+      pillStore.pills = data
+    }
+  },
+});
+
 </script>

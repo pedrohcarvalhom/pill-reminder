@@ -10,7 +10,8 @@
     "sunday": "Dom"
   },
   "medicines": {
-    "toTake": "Remédios a tomar"
+    "toTake": "Remédios a tomar",
+    "loading": "Carregando os remedios de hoje..."
   },
   "buttons": {
     "add": "Adicionar",
@@ -25,8 +26,11 @@
       "title": "Adicionar remédio",
       "name": "Nome do remédio",
       "nameError": "Por favor, digite o nome do remédio",
+      "nameLength": "Nome muito curto",
+      "nameLengthPlus": "Nome muito longo",
       "quantity": "Quantidade (por dia)",
       "quantityError": "Por favor, digite a quantidade de remédios",
+      "invalidQtd": "Quantidade inválida",
       "measure": "Unidade de medida",
       "measureError": "Por favor, digite a unidade de medida",
       "time": "Horário",

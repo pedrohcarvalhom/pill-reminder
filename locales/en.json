@@ -10,7 +10,8 @@
     "sunday": "Sun"
   },
   "medicines": {
-    "toTake": "To take"
+    "toTake": "To take",
+    "loading": "Loading today's medication..."
   },
   "buttons": {
     "add": "Add",
@@ -25,8 +26,11 @@
       "title": "Add pill",
       "name": "Pill name",
       "nameError": "Please enter the name of the pill",
+      "nameLength": "Nome too short",
+      "nameLengthPlus": "Nome too long",
       "quantity": "Quantity (for each day)",
       "quantityError": "Please enter the quantity of pills",
+      "invalidQtd": "Invalid quantity",
       "measure": "Measurement unit",
       "measureError": "Please enter the measurement unit",
       "time": "Time to take",

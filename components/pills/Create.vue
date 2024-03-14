@@ -61,6 +61,8 @@ import {
   FormMessage,
   FormDescription
 } from '@/components/ui/form'
+import { useUserStore } from '~/store/user'
+import { usePillStore } from '~/store/pill'
 
 const props = defineProps({
   modelValue: {
@@ -74,9 +76,9 @@ const isRegisteringPill = defineModel({
 })
 const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
-  name: z.string({ required_error: t('pills.form.nameError') }).min(2).max(50),
-  quantity: z.number({ required_error: t('pills.form.quantityError') }).positive(),
-  hour: z.string({ required_error: t('pills.form.timeError') }),
+  name: z.string({ required_error: t('pills.form.nameError') }).min(2, t('pills.form.nameLength')).max(50, t('pills.form.nameLengthPlus')),
+  quantity: z.number({ required_error: t('pills.form.quantityError'), invalid_type_error: t('pills.form.invalidQtd') }).positive(t('pills.form.invalidQtd')),
+  hour: z.string({ required_error: t('pills.form.timeError'), invalid_type_error: t('pills.form.timeError') }),
   measure: z.enum(['mg', 'gr', 'ml', 'full', 'half'])
 }))
 
@@ -84,7 +86,33 @@ const form = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
+const userStore = useUserStore()
+const { setPill } = usePillStore()
+const onSubmit = form.handleSubmit(async (values) => {
+  try {
+    const body = {
+      ...values,
+      email: userStore.email,
+    }
+    const { pill } = await $fetch('/api/pills', {
+      method: 'POST',
+      body
+    });
+
+    setPill({ hours: pill.hours, id: pill.id, name: pill.name, quantity: pill.quantity, measure: pill.measure })
+  } catch (error: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const errorConverted = error as any
+
+    if (errorConverted.status === 401) {
+      window.alert("Não autenticado, faça login novamente.")
+      return
+    } else {
+      window.alert(errorConverted.message)
+    }
+  }
+
+
+  isRegisteringPill.value = false
 })
 </script>

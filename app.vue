@@ -1,5 +1,6 @@
 <template lang="pug">
 div
+  NuxtLoadingIndicator
   NuxtPage
 </template>
 

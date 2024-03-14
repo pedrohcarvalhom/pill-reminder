@@ -30,7 +30,8 @@ export const useUserStore = defineStore('user', {
   },
   getters: {
     userName: (state) => state.user?.name || '',
-    isLoaded: (state) => state.loadedUserInfo
+    isLoaded: (state) => state.loadedUserInfo,
+    email: (state) => state.authInfo.email,
   }
 })
 
