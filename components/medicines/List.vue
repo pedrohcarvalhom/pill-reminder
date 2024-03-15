@@ -1,6 +1,6 @@
 <template>
   <div v-if="pills.length">
-    <Card v-for="pill in pills" :key="pill.id" class="m-4 rounded-3xl bg-gray-200 dark:bg-gray-200">
+    <Card v-for="pill in pills" :key="pill.id" class="m-4 rounded-3xl w-full md:w-[50vw] bg-gray-200 dark:bg-gray-200">
       <div class="flex items-center ml-3">
         <div class="flex-none w-14 h-14 bg-blue-400 rounded-lg">
         </div>
@@ -27,7 +27,8 @@
       </div>
 
       <CardFooter>
-        <Button variant="outline" class="w-full hover:bg-red-500" @click="goToEdit">{{ $t('buttons.edit') }}</Button>
+        <Button variant="outline" class="w-full hover:bg-red-500" @click="goToEdit(pill.id!)">{{ $t('buttons.edit')
+        }}</Button>
       </CardFooter>
     </Card>
   </div>
@@ -43,7 +44,7 @@ import { usePillStore } from '~/store/pill';
 
 const { pills } = storeToRefs(usePillStore());
 const router = useRouter();
-function goToEdit() {
-  router.push('/pills/1')
+function goToEdit(indexPill: number) {
+  router.push(`/pills/${indexPill}`);
 }
 </script>

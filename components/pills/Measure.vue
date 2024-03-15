@@ -4,11 +4,24 @@ Card(class="w-44 bg-gray-100 shadow-lg dark:bg-gray-100")
     div(class="flex items-center justify-center")
       Icon(class="w-10 h-10" name="openmoji:medication")
     div(class="flex flex-col items-center justify-center mr-auto")
-      span(class="font-bold dark:text-gray-900") 60mg
-      span(class="ml-2 dark:text-gray-900") por dia
+      span(class="font-bold dark:text-gray-900") {{ props.quantity }} {{ props.measure }}
+      span(class="ml-2 dark:text-gray-900") {{ props.time }}
 
 </template>
 
 <script setup lang="ts">
-
+const props = defineProps({
+  quantity: {
+    type: Number,
+    required: true
+  },
+  measure: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  }
+})
 </script>

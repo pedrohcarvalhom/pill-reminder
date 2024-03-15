@@ -8,7 +8,7 @@
         <FormItem class="mt-4">
           <FormLabel>{{ $t('register.form.email') }}</FormLabel>
           <FormControl>
-            <Input type="email" v-bind="componentField" />
+            <Input class="dark:bg-gray-600" type="email" v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -17,13 +17,13 @@
         <FormItem class="mt-4">
           <FormLabel>{{ $t('register.form.password') }}</FormLabel>
           <FormControl>
-            <Input type="password" v-bind="componentField" />
+            <Input class="dark:bg-gray-600" type="password" v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
       </FormField>
       <div class="flex flex-col mt-4">
-        <Button class=" bg-red-950 w-1/2 mx-auto" type="submit">Login</Button>
+        <Button class="bg-red-950 dark:bg-gray-200 w-1/2 mx-auto" type="submit">Login</Button>
         <Button variant="ghost" class="p-0 mt-1" @click="$emit('dontHaveAccount')">Não possui uma conta?
           Registre-se</Button>
       </div>
