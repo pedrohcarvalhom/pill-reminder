@@ -5,7 +5,9 @@ interface PillRequest {
   quantity: number
   hour: string
   measure: string,
-  email: string
+  email: string,
+  description?: string,
+  when?: number
 }
 export default defineEventHandler(async (event) => {
   const body: PillRequest = await readBody(event)
@@ -36,7 +38,9 @@ export default defineEventHandler(async (event) => {
       quantity: body.quantity,
       measure: body.measure,
       hours: [body.hour],
-      userId: user.id
+      userId: user.id,
+      description: body.description,
+      when: body.when?.toString()
     }
   })
 
@@ -46,5 +50,4 @@ export default defineEventHandler(async (event) => {
   } else {
     setResponseStatus(event, 422)
   }
-
 })

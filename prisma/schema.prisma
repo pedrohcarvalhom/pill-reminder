@@ -16,11 +16,13 @@ model User {
 }
 
 model Pill {
-  id       Int      @id @default(autoincrement())
-  name     String
-  quantity Int
-  measure  String
-  hours    String[]
-  user     User     @relation(fields: [userId], references: [id])
-  userId   Int
+  id          Int      @id @default(autoincrement())
+  name        String
+  quantity    Int
+  measure     String
+  hours       String[]
+  when        String?
+  description String?
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
 }

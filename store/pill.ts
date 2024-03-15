@@ -23,6 +23,7 @@ export const usePillStore = defineStore('pill', {
 
 interface Pill {
   id?: number,
+  description?: string,
   name: string,
   quantity: number,
   hours: string[],

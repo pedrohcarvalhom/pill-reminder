@@ -12,6 +12,16 @@
           <FormMessage />
         </FormItem>
       </FormField>
+      <FormField v-slot="{ componentField }" name="description">
+        <FormItem class="mt-5 flex flex-col">
+          <FormLabel>Descrição do remédio</FormLabel>
+          <FormControl>
+            <Textarea class="border border-black rounded-md" v-bind="componentField" />
+          </FormControl>
+          <FormDescription>Informações úteis para se lembrar</FormDescription>
+          <FormMessage />
+        </FormItem>
+      </FormField>
       <FormField v-slot="{ componentField }" name="measure">
         <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.measure') }}</FormLabel>
@@ -27,6 +37,16 @@
           <FormControl>
             <Input type="number" v-bind="componentField" />
           </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="when">
+        <FormItem class="mt-4">
+          <FormLabel>Quantas vezes por semana? (Apenas números)</FormLabel>
+          <FormControl>
+            <Input type="number" v-bind="componentField" />
+          </FormControl>
+          <FormDescription>Ex.: 1 vez por semana, 2 vezes...</FormDescription>
           <FormMessage />
         </FormItem>
       </FormField>
@@ -53,7 +73,6 @@ import * as z from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -64,12 +83,6 @@ import {
 import { useUserStore } from '~/store/user'
 import { usePillStore } from '~/store/pill'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
 const isRegisteringPill = defineModel({
   type: Boolean,
   default: false,
@@ -77,6 +90,8 @@ const isRegisteringPill = defineModel({
 const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
   name: z.string({ required_error: t('pills.form.nameError') }).min(2, t('pills.form.nameLength')).max(50, t('pills.form.nameLengthPlus')),
+  description: z.string().optional(),
+  when: z.number().min(1).max(7, t('pills.form.invalidQtd')),
   quantity: z.number({ required_error: t('pills.form.quantityError'), invalid_type_error: t('pills.form.invalidQtd') }).positive(t('pills.form.invalidQtd')),
   hour: z.string({ required_error: t('pills.form.timeError'), invalid_type_error: t('pills.form.timeError') }),
   measure: z.enum(['mg', 'gr', 'ml', 'full', 'half'])
