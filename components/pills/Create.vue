@@ -16,7 +16,7 @@
         <FormItem class="mt-5 flex flex-col">
           <FormLabel>Descrição do remédio</FormLabel>
           <FormControl>
-            <Textarea class="border border-black rounded-md" v-bind="componentField" />
+            <Textarea class="border border-black rounded-md p-2" v-bind="componentField" />
           </FormControl>
           <FormDescription>Informações úteis para se lembrar</FormDescription>
           <FormMessage />
@@ -46,8 +46,8 @@
           <FormControl>
             <Input type="number" v-bind="componentField" />
           </FormControl>
-          <FormDescription>Ex.: 1 vez por semana, 2 vezes...</FormDescription>
           <FormMessage />
+          <FormDescription>Ex.: 1 vez por semana, 2 vezes...</FormDescription>
         </FormItem>
       </FormField>
       <FormField v-slot="{ componentField }" name="hour">
@@ -91,7 +91,7 @@ const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
   name: z.string({ required_error: t('pills.form.nameError') }).min(2, t('pills.form.nameLength')).max(50, t('pills.form.nameLengthPlus')),
   description: z.string().optional(),
-  when: z.number().min(1).max(7, t('pills.form.invalidQtd')),
+  when: z.number({ required_error: 'Campo obrigatório', invalid_type_error: 'Deve ser um número' }).min(1, 'Deve ser maior que 0').max(7, t('pills.form.invalidQtd')),
   quantity: z.number({ required_error: t('pills.form.quantityError'), invalid_type_error: t('pills.form.invalidQtd') }).positive(t('pills.form.invalidQtd')),
   hour: z.string({ required_error: t('pills.form.timeError'), invalid_type_error: t('pills.form.timeError') }),
   measure: z.enum(['mg', 'gr', 'ml', 'full', 'half'])
