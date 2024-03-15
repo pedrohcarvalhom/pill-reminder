@@ -11,7 +11,7 @@
         <div class="flex items-center justify-between my-8">
           <div class="flex flex-col">
             <span class="text-2xl font-bold">{{ data?.pill.name }}</span>
-            <span class="text-lg font-medium">Futura descrição do remédio</span>
+            <span class="text-lg font-medium">{{ data?.pill.description || '-' }}</span>
           </div>
           <div>
             <Icon class="w-8 h-8" name="emojione:pencil"></Icon>
@@ -19,7 +19,7 @@
         </div>
         <div class="flex gap-2 mb-4">
           <pills-measure :measure="data?.pill.measure" :quantity="data?.pill.quantity" time="Por dia" />
-          <pills-time :measure="data?.pill.measure" :quantity="data?.pill.quantity" />
+          <pills-time :quantity="data?.pill.when" />
         </div>
         <div class="flex justify-between items-center my-4"><span class="text-2xl font-bold text-black dark:text-white">{{
           $t('pills.schedule') }}</span><a

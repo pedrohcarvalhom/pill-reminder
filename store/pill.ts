@@ -28,4 +28,5 @@ interface Pill {
   quantity: number,
   hours: string[],
   measure: string,
+  when?: string,
 }
