@@ -13,7 +13,7 @@
       </Button>
     </div>
     <div class="flex flex-col items-center mr-10 md:mr-0">
-      <MedicinesList v-if="isLoaded" class="mt-4" />
+      <MedicinesList v-if="status == 'success' && pillStore.pills.length" class="mt-4" />
       <span v-else class="h-[50vh] flex justify-center items-center"> {{ $t('medicines.loading') }}</span>
     </div>
     <PillsCreate v-model="isRegisteringPill" />
@@ -30,7 +30,7 @@ const { isLoaded, email } = storeToRefs(useUserStore());
 const pillStore = usePillStore();
 const nuxt = useNuxtApp();
 
-await useFetch('/api/pills', {
+const { status } = await useFetch('/api/pills', {
   method: 'GET',
   query: { email },
   watch: [isLoaded],

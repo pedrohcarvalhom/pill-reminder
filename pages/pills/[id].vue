@@ -21,24 +21,32 @@
           <pills-measure :measure="data?.pill.measure" :quantity="data?.pill.quantity" time="Por dia" />
           <pills-time :quantity="data?.pill.when" />
         </div>
-        <div class="flex justify-between items-center my-4"><span class="text-2xl font-bold text-black dark:text-white">{{
-          $t('pills.schedule') }}</span><a
-            class="flex items-center justify-center transition-all duration-150 ease-in-out" @click="editing = true">
+        <div class="flex justify-between items-center my-4">
+          <span class="text-2xl font-bold text-black dark:text-white">{{
+            $t('pills.schedule') }}
+          </span>
+          <a class="flex items-center justify-center transition-all duration-150 ease-in-out" @click="editing = true">
             <icon class="text-red-500 mb-1 mr-1 w-5 h-5" :class="{ 'animate-bounce': editing }"
-              name="mdi:pencil-plus-outline"></icon><span class="text-lg font-bold mr-1 text-red-500 dark:text-red-300"
-              :class="{ 'animate-bounce': editing }">{{ editing ? 'Editando...' : $t('buttons.edit') }}</span>
-          </a></div>
+              name="mdi:pencil-plus-outline" />
+            <span class="text-lg font-bold mr-1 text-red-500 dark:text-red-300" :class="{ 'animate-bounce': editing }">{{
+              editing ? 'Editando...' : $t('buttons.edit') }}
+            </span>
+          </a>
+        </div>
         <div class="mt-2">
           <div v-show="editing" class="flex items-center gap-2">
-            <Input v-model="timeSelected" class="my-2 ml-auto w-40 bg-red-50" type="time"></Input>
-            <div><a>
+            <Input v-model="timeSelected" class="my-2 ml-auto w-40 bg-red-50" type="time" />
+            <div>
+              <a>
                 <Icon class="w-8 h-8 transition-all duration-150 ease-in-out" name="icon-park-solid:check-one"
-                  :class="timeSelected ? 'text-green-500' : 'text-gray-400'"></Icon>
-              </a><a @click="editing = false">
-                <Icon class="w-8 h-8 text-red-500" name="icon-park-solid:close-one"></Icon>
-              </a></div>
+                  :class="timeSelected ? 'text-green-500' : 'text-gray-400'" />
+              </a>
+              <a @click="editing = false">
+                <Icon class="w-8 h-8 text-red-500" name="icon-park-solid:close-one" />
+              </a>
+            </div>
           </div>
-          <pills-schedule></pills-schedule>
+          <pills-schedule :hours="data?.pill.hours" />
         </div>
       </div>
     </div>
