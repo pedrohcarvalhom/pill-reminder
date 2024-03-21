@@ -12,17 +12,40 @@ model User {
   id    Int    @id @default(autoincrement())
   email String @unique
   name  String
-  Pill  Pill[]
+}
+
+model Pacient {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  Pill        Pill[]
+}
+
+model UserPacient {
+  id        Int
+  userId    Int
+  pacientId Int
+
+  @@id([userId, pacientId])
 }
 
 model Pill {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   quantity    Int
   measure     String
-  hours       String[]
   when        String?
   description String?
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
+  pacient     Pacient @relation(fields: [pacientId], references: [id])
+  pacientId   Int
+  Hour        Hour[]
+}
+
+model Hour {
+  id        Int      @id @default(autoincrement())
+  time      String
+  pillId    Int
+  pill      Pill     @relation(fields: [pillId], references: [id])
+  checked   Boolean
+  checkedAt DateTime
 }
