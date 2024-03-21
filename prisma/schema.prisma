@@ -9,24 +9,18 @@ generator client {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  pacients Pacient[]
+  name     String
 }
 
 model Pacient {
   id          Int     @id @default(autoincrement())
   name        String
   description String?
+  users       User[]
   Pill        Pill[]
-}
-
-model UserPacient {
-  id        Int
-  userId    Int
-  pacientId Int
-
-  @@id([userId, pacientId])
 }
 
 model Pill {

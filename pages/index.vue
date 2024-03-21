@@ -29,7 +29,7 @@ const { isLoaded, email } = storeToRefs(useUserStore());
 const pillStore = usePillStore();
 const nuxt = useNuxtApp();
 
-const { status } = await useFetch('/api/pills', {
+const { status } = await useFetch('/api/pacient', {
   method: 'GET',
   query: { email },
   watch: [isLoaded],
@@ -40,8 +40,7 @@ const { status } = await useFetch('/api/pills', {
       return
     }
 
-    const pills = res.response._data.pills;
-    pillStore.setPills(pills);
+    console.log(res.response._data)
   },
   getCachedData(key) {
     const data = nuxt.isHydrating ? nuxt.payload.data[key] : nuxt.static.data[key];
