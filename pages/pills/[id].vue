@@ -27,9 +27,8 @@
           </span>
           <a class="flex items-center justify-center transition-all duration-150 ease-in-out cursor-pointer"
             @click="editing = true">
-            <icon class="text-red-500 mb-1 mr-1 w-5 h-5" :class="{ 'animate-bounce': editing }"
-              name="mdi:pencil-plus-outline" />
-            <span class="text-lg font-bold mr-1 text-red-500 dark:text-red-300" :class="{ 'animate-bounce': editing }">{{
+            <icon class="text-red-500 mb-1 mr-1 w-5 h-5" name="mdi:pencil-plus-outline" />
+            <span class="text-lg font-bold mr-1 text-red-500 dark:text-red-300">{{
               editing ? 'Editando...' : $t('buttons.edit') }}
             </span>
           </a>

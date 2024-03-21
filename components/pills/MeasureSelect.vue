@@ -1,8 +1,7 @@
 <template>
   <div class="card flex justify-content-center">
     <PrimeDropdown v-model="selectedMeasure" :options="cities" optionLabel="name" optionValue="code"
-      placeholder="Selecione a medida" class="w-full md:w-14rem"
-      :pt="{ root: ({ }) => { return 'border border-black' } }" />
+      placeholder="Selecione a medida" class="w-full md:w-14rem" :pt="{ root: ({ }) => { return 'border' } }" />
   </div>
 </template>
 

@@ -16,7 +16,7 @@
         <FormItem class="mt-5 flex flex-col">
           <FormLabel>Descrição do remédio</FormLabel>
           <FormControl>
-            <Textarea class="border border-black rounded-md p-2" v-bind="componentField" />
+            <Textarea class="rounded-md p-2" v-bind="componentField" />
           </FormControl>
           <FormDescription>Informações úteis para se lembrar</FormDescription>
           <FormMessage />
@@ -71,6 +71,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import {
   FormControl,
