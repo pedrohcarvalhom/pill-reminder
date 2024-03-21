@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: true, telemetry: true },
+  app: {
+    head: {
+      title: 'Pill Reminder',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Pill Reminder - Lembre-se dos seus remédios' },
+      ]
+    }
+  },
   modules: [
     "@nuxtjs/tailwindcss",
     '@nuxtjs/color-mode',
