@@ -12,7 +12,7 @@
         <span class="text-sm md:text-2xl"> {{ $t('buttons.add') }} </span>
       </Button>
     </div>
-    <div class="flex flex-col items-center mr-10 md:mr-0">
+    <div class="flex flex-col md:items-center">
       <MedicinesList v-if="status == 'success' && pillStore.pills.length" class="mt-4" />
       <span v-else class="h-[50vh] flex justify-center items-center"> {{ $t('medicines.loading') }}</span>
     </div>
@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Pill } from '@prisma/client';
 import { usePillStore } from '~/store/pill';
 import { useUserStore } from '~/store/user';
 
@@ -41,7 +40,7 @@ const { status } = await useFetch('/api/pills', {
       return
     }
 
-    const pills = res.response._data.pills as Pill[];
+    const pills = res.response._data.pills;
     pillStore.setPills(pills);
   },
   getCachedData(key) {

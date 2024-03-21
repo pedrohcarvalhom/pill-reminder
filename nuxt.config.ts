@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     'nuxt-primevue',
     '@nuxtjs/supabase',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    "@nuxt/image"
   ],
   i18n: {
     vueI18n: './i18n.config.ts',
