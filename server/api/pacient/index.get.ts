@@ -10,10 +10,11 @@ export default defineEventHandler(async (event) => {
         some: {
           email
         }
-      }
+      },
     },
     include: {
-      users: true
+      users: true,
+      pills: true
     }
   });
 

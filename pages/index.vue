@@ -27,12 +27,14 @@ const { status, refresh } = await useFetch('/api/pacient', {
   watch: [isLoaded],
   responseType: 'json',
   transform(data) {
-    pacients.value = data.pacients.map((pacient) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    pacients.value = data.pacients.map((pacient: any) => {
       return {
         id: pacient.id,
         name: pacient.name,
         description: pacient.description,
-        users: pacient.users
+        users: pacient.users,
+        pills: pacient.pills
       };
     }) as unknown as PacientResponse[]
   }

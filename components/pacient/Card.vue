@@ -1,22 +1,38 @@
 <template>
-  <Card class="w-full h-20 flex p-2 my-1 border border-b-slate-100">
-    <div class="flex items-center">
+  <Card class="flex justify-between items-center w-full h-20 p-2 my-1 border border-b-slate-100">
+    <div class="flex items-center gap-4">
       <div class="h-10 w-10 bg-red-500 rounded-full"></div>
-      <CardHeader class="mt-2">
-        <CardTitle>{{ pacient.name }}</CardTitle>
-        <CardDescription>{{ pacient.description }}</CardDescription>
-      </CardHeader>
+      <div>
+        <CardTitle>{{ props.pacient.name }}</CardTitle>
+        <CardDescription class="mt-2">{{ props.pacient.pills.length }} {{
+          pluralizePill(props.pacient.pills.length) }} • {{ pacientUsers(props.pacient.users) }} </CardDescription>
+      </div>
     </div>
-    <CardFooter class="flex items-center mt-5 ml-auto">
+    <div class="flex gap-4">
       <PacientDropdown />
-    </CardFooter>
+    </div>
   </Card>
 </template>
 
 <script setup lang="ts">
-const pacient = {
-  name: 'Pacient Name',
-  description: 'Pacient Description',
-  id: 1,
+import type { PropType } from 'vue';
+import type { PacientResponse, UsersResponse } from '~/types/types';
+
+const props = defineProps({
+  pacient: {
+    type: Object as PropType<PacientResponse>,
+    required: true
+  }
+})
+
+function pluralizePill(quantity: number) {
+  if (quantity === 0) return 'remédios';
+  return quantity > 1 ? 'remédios' : 'remédio';
+}
+
+function pacientUsers(users: UsersResponse[]) {
+  if (users.length === 0) return 'nenhum cuidador';
+
+  return users.length > 1 ? `${users.length} cuidadores` : '1 cuidador';
 }
 </script>

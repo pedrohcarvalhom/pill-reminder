@@ -20,7 +20,7 @@ model Pacient {
   name        String
   description String?
   users       User[]
-  Pill        Pill[]
+  pills       Pill[]
 }
 
 model Pill {
@@ -32,14 +32,14 @@ model Pill {
   description String?
   pacient     Pacient @relation(fields: [pacientId], references: [id])
   pacientId   Int
-  Hour        Hour[]
+  hour        Hour[]
 }
 
 model Hour {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   time      String
   pillId    Int
-  pill      Pill     @relation(fields: [pillId], references: [id])
+  pill      Pill      @relation(fields: [pillId], references: [id])
   checked   Boolean
-  checkedAt DateTime
+  checkedAt DateTime?
 }
