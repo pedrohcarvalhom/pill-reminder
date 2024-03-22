@@ -1,14 +1,12 @@
 <template>
-  <header>
+  <header class="mb-6">
     <HeaderNavigation />
   </header>
   <main class="md:container">
-    <DatesList />
-    <hr class="my-4">
     <CommonsLoadingIndicator v-if="status === 'pending'" />
     <HomeEmptyState v-else-if="!pacients.length" @created="refresh" />
     <div v-else>
-      <PacientList :pacients="pacients" />
+      <PacientList :pacients="pacients" @created="refresh" />
     </div>
   </main>
 </template>

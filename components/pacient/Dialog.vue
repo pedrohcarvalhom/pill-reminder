@@ -1,7 +1,7 @@
 <template>
   <CommonsBaseDialog v-model:open="open">
     <template #trigger>
-      <Button>+ Cadastrar novo paciente</Button>
+      <Button>{{ props.buttonLabel }}</Button>
     </template>
     <template #title>Cadastro de paciente</template>
     <template #description>
@@ -54,6 +54,12 @@ import {
 } from '@/components/ui/form'
 import { useUserStore } from '~/store/user'
 
+const props = defineProps({
+  buttonLabel: {
+    type: String,
+    default: '+ Cadastrar novo paciente'
+  }
+});
 const emit = defineEmits(['created']);
 const open = ref(false);
 const isLoading = ref(false);
