@@ -15,6 +15,7 @@ const cities = ref([
   { name: 'Grama', code: 'gr' },
   { name: 'Ml (Mililitros)', code: 'ml' },
   { name: 'Inteiro', code: 'full' },
-  { name: 'Metade', code: 'half' }
+  { name: 'Metade', code: 'half' },
+  { name: 'Gotas', code: 'drops' },
 ]);
 </script>

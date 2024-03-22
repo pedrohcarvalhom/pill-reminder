@@ -110,7 +110,7 @@ const formSchema = toTypedSchema(z.object({
   when: z.number({ required_error: 'Campo obrigatório', invalid_type_error: 'Deve ser um número' }).min(1, 'Deve ser maior que 0').max(7, t('pills.form.invalidQtd')),
   quantity: z.number({ required_error: t('pills.form.quantityError'), invalid_type_error: t('pills.form.invalidQtd') }).positive(t('pills.form.invalidQtd')),
   hour: z.string({ required_error: t('pills.form.timeError'), invalid_type_error: t('pills.form.timeError') }),
-  measure: z.enum(['mg', 'gr', 'ml', 'full', 'half']),
+  measure: z.enum(['mg', 'gr', 'ml', 'full', 'half', 'drops']),
   pacient: z.number({ required_error: "Paciente obrigatório" }),
 }))
 
