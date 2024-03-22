@@ -1,5 +1,5 @@
 <template>
-  <AlertDialog>
+  <AlertDialog v-model:open="open">
     <AlertDialogTrigger>
       <slot name="trigger"></slot>
     </AlertDialogTrigger>
@@ -29,4 +29,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+
+const open = defineModel<boolean>('open', { required: true })
 </script>

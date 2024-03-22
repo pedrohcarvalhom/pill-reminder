@@ -5,8 +5,10 @@
       Para começar, <span class="text-red-500">cadastre um paciente.</span> É por ele que iremos cadastrar os remédios
       necessários e compartilhar entre usuários!
     </span>
-    <PacientDialog />
+    <PacientDialog @created="$emit('created')" />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineEmits(['created']);
+</script>
