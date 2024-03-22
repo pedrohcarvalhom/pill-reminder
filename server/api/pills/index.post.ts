@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../client"
 
 interface PillRequest {
@@ -7,47 +8,62 @@ interface PillRequest {
   measure: string,
   email: string,
   description?: string,
-  when?: number
-}
+  when?: number;
+  pacient: number;
+};
+
 export default defineEventHandler(async (event) => {
   const body: PillRequest = await readBody(event)
+  const email = getQuery(event).email?.toString();
 
-  if (!body.email) {
+  if (!email) {
     throw createError({
       statusCode: 401,
       message: 'Não autorizado',
     })
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: body.email
-    }
-  })
+  try {
+    await prisma.user.findUniqueOrThrow({
+      where: {
+        email
+      }
+    });
+    const pill = await prisma.pill.create({
+      data: {
+        name: body.name,
+        quantity: body.quantity,
+        measure: body.measure,
+        description: body.description,
+        when: body.when?.toString(),
+        pacient: {
+          connect: {
+            id: body.pacient
+          }
+        },
+        hour: {
+          create: {
+            time: body.hour,
+            checked: false,
+          }
+        }
+      },
+    });
 
-  if (!user) {
-    throw createError({
-      statusCode: 402,
-      message: 'Usuário não encontrado',
-    })
-  }
-
-  const pill = await prisma.pill.create({
-    data: {
-      name: body.name,
-      quantity: body.quantity,
-      measure: body.measure,
-      hours: [body.hour],
-      userId: user.id,
-      description: body.description,
-      when: body.when?.toString()
-    }
-  })
-
-  if (pill) {
-    setResponseStatus(event, 200)
     return { pill }
-  } else {
-    setResponseStatus(event, 422)
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2025') {
+        throw createError({
+          statusCode: 401,
+          message: 'Não autorizado',
+        })
+      } else {
+        throw createError({
+          statusCode: 500,
+          message: 'Erro interno. Tente novamente',
+        })
+      }
+    }
   }
 })

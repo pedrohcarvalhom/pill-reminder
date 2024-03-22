@@ -22,6 +22,15 @@
           <FormMessage />
         </FormItem>
       </FormField>
+      <FormField v-slot="{ componentField }" name="pacient">
+        <FormItem class="mt-4">
+          <FormLabel>Paciente</FormLabel>
+          <FormControl>
+            <PillsPacientSelect :pacients="props.pacients" v-bind="componentField" />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
       <FormField v-slot="{ componentField }" name="measure">
         <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.measure') }}</FormLabel>
@@ -82,8 +91,14 @@ import {
   FormDescription
 } from '@/components/ui/form'
 import { useUserStore } from '~/store/user'
-import { usePillStore } from '~/store/pill'
+import type { PacientResponse } from '~/types/types'
 
+const props = defineProps({
+  pacients: {
+    type: Array as PropType<PacientResponse[]>,
+    required: true
+  }
+})
 const isRegisteringPill = defineModel({
   type: Boolean,
   default: false,
@@ -95,7 +110,8 @@ const formSchema = toTypedSchema(z.object({
   when: z.number({ required_error: 'Campo obrigatório', invalid_type_error: 'Deve ser um número' }).min(1, 'Deve ser maior que 0').max(7, t('pills.form.invalidQtd')),
   quantity: z.number({ required_error: t('pills.form.quantityError'), invalid_type_error: t('pills.form.invalidQtd') }).positive(t('pills.form.invalidQtd')),
   hour: z.string({ required_error: t('pills.form.timeError'), invalid_type_error: t('pills.form.timeError') }),
-  measure: z.enum(['mg', 'gr', 'ml', 'full', 'half'])
+  measure: z.enum(['mg', 'gr', 'ml', 'full', 'half']),
+  pacient: z.number({ required_error: "Paciente obrigatório" }),
 }))
 
 const form = useForm({
@@ -103,28 +119,28 @@ const form = useForm({
 })
 
 const userStore = useUserStore()
-const { setPill } = usePillStore()
 const onSubmit = form.handleSubmit(async (values) => {
   try {
     const body = {
       ...values,
-      email: userStore.email,
     }
     const { pill } = await $fetch('/api/pills', {
       method: 'POST',
-      body
+      body,
+      query: {
+        email: userStore.user?.email
+      }
     });
 
-    setPill({ hours: pill.hours, id: pill.id, name: pill.name, quantity: pill.quantity, measure: pill.measure })
-  } catch (error: unknown) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const errorConverted = error as any
-
-    if (errorConverted.status === 401) {
-      window.alert("Não autenticado, faça login novamente.")
-      return
-    } else {
-      window.alert(errorConverted.message)
+    console.log(pill)
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.status === 401) {
+        window.alert("Não autenticado, faça login novamente.")
+        return
+      } else {
+        window.alert(error.message)
+      }
     }
   }
 
