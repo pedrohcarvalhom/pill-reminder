@@ -10,6 +10,10 @@ Após realizar o registro e o login, cadastre o seu paciente. É nele que as inf
 
 Foi utilizado Nuxt de ponta a ponta com o intuito de aprender mais sobre o framework. Para facilitar as coisas, utilizei Prisma como ORM.
 
+### Estilização
+Foi utilizado Tailwind e Shadcn Vue em 95% dos componentes. O restante utilizei os componentes do PrimeVue ou criei por conta propria.
+
+### Entidades
 De maneira geral, esse é o fluxograma (simples) das relações
 ![image](https://github.com/pedrohcarvalhom/pill-reminder/assets/109979933/c60ae494-4539-4cdc-8180-1cd0aabbbd52)
 
