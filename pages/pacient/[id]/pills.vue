@@ -1,10 +1,10 @@
 <template>
 <main class="container">
   <div v-if="status == 'pending'" class="w-full flex justify-center">
-    <span>Carregando os remédios..</span>
+    <span class="text-2xl font-bold animate-bounce">Carregando os <span class="text-red-500">remédios...</span></span>
   </div>
   <div v-if="status == 'error'" class="w-full flex justify-center">
-    <span>Erro ao carregar os remédios</span>
+    <span class="text-2xl font-bold"><span class="text-red-500">Erro</span> ao carregar os remédios</span>
   </div>
   <div v-if="status == 'success'" class="w-full flex justify-center">
     <div v-if="!pills.length">
