@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const pacientId = getRouterParam(event, 'id');
 
   try {
-    const { pills } = await prisma.pacient.findFirstOrThrow({
+    const pacient = await prisma.pacient.findFirstOrThrow({
       where: {
         id: Number(pacientId)
       },
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
       }
     });
 
-    return { pills }
+    return { pacient, pills: pacient.pills }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {

@@ -1,7 +1,4 @@
 <template>
-  <header class="mb-6">
-    <HeaderNavigation />
-  </header>
   <main class="md:container">
     <CommonsLoadingIndicator v-if="status === 'pending'" />
     <HomeEmptyState v-else-if="!pacients.length" @created="refresh" />

@@ -6,7 +6,7 @@
       depois!
     </span>
     <Button @click="isRegisteringPill = true">+ Cadastrar remédio</Button>
-    <PillsCreate v-model="isRegisteringPill" :pacients="props.pacients" />
+    <PillsCreate v-model="isRegisteringPill" :pacients="props.pacients" :selected-pacient="props.selectedPacient" @created="$emit('created')" />
   </div>
 </template>
 
@@ -18,7 +18,11 @@ defineEmits(['created']);
 const props = defineProps({
   pacients: {
     type: Array as PropType<PacientResponse[]>,
-    required: true
+    default: () => []
+  },
+  selectedPacient: {
+    type: Object,
+    default: undefined
   }
 })
 const isRegisteringPill = ref(false);

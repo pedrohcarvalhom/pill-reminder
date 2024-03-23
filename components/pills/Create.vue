@@ -1,5 +1,6 @@
 <template>
-  <PrimeDialog v-model:visible="isRegisteringPill" modal :style="{ width: '90vw' }"
+  <PrimeDialog
+v-model:visible="isRegisteringPill" modal :style="{ width: '90vw' }"
     :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
     <span class="text-xl font-bold mb-4">{{ $t('pills.form.title') }}</span>
     <form @submit="onSubmit">
@@ -26,7 +27,7 @@
         <FormItem class="mt-4">
           <FormLabel>Paciente</FormLabel>
           <FormControl>
-            <PillsPacientSelect :pacients="props.pacients" v-bind="componentField" />
+            <PillsPacientSelect :pacients="props.pacients" :pacient-selected="props.selectedPacient" v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -93,10 +94,15 @@ import {
 import { useUserStore } from '~/store/user'
 import type { PacientResponse } from '~/types/types'
 
+const emit = defineEmits(['created'])
 const props = defineProps({
   pacients: {
     type: Array as PropType<PacientResponse[]>,
-    required: true
+    default: () => []
+  },
+  selectedPacient: {
+    type: Object,
+    default: undefined
   }
 })
 const isRegisteringPill = defineModel({
@@ -124,7 +130,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     const body = {
       ...values,
     }
-    const { pill } = await $fetch('/api/pills', {
+    await $fetch('/api/pills', {
       method: 'POST',
       body,
       query: {
@@ -132,19 +138,14 @@ const onSubmit = form.handleSubmit(async (values) => {
       }
     });
 
-    console.log(pill)
+    emit('created')
   } catch (error) {
     if (error instanceof Error) {
-      if (error.status === 401) {
-        window.alert("Não autenticado, faça login novamente.")
-        return
-      } else {
-        window.alert(error.message)
-      }
+      window.alert(error.message);
     }
   }
 
 
   isRegisteringPill.value = false
-})
+});
 </script>
