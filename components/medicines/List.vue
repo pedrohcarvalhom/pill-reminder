@@ -16,10 +16,10 @@
                 <Icon class="text-red-500" name="solar:pills-bold-duotone" />
                 {{ pill.quantity }} {{ pill.measure }}
               </span>
-              <!-- <span class="flex gap-2 items-center text-lg text-gray-800 font-medium">
+              <span class="flex gap-2 items-center text-lg text-gray-800 font-medium">
                 <Icon class="text-red-500" name="clarity:clock-solid" />
-                {{ pill.hours.map(hour => hour).join(', ') }}
-              </span> -->
+                {{ pill.hours.map(hour => hour.time).join(', ') }}
+              </span>
             </CardDescription>
           </CardContent>
         </div>
