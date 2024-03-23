@@ -1,7 +1,8 @@
 <template lang="pug">
-div
-  NuxtLoadingIndicator
-  NuxtPage
+nuxt-layout
+  div
+    NuxtLoadingIndicator
+    NuxtPage
 </template>
 
 

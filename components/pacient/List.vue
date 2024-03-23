@@ -1,11 +1,11 @@
 <template>
   <div v-if="anyPacientHavePill">
     <div class="flex justify-between w-full items-center p-2">
-      <div class="flex flex-col">
+      <div class="flex flex-col w-[300px] md:w-[600px]">
         <span class="ml-2 text-2xl font-semibold">Seus pacientes</span>
-        <caption class="inline-flex ml-2 text-sm font-normal text-stone-500 dark:text-stone-400">
+        <span class="ml-2 text-sm font-normal text-stone-500 dark:text-stone-400">
           Clique em algum paciente para acessar mais informações
-        </caption>
+        </span>
       </div>
       <PacientDialog :button-label="'+ Novo paciente'" @created="$emit('created')" />
     </div>

@@ -1,6 +1,6 @@
 <template>
   <Card class="flex justify-between items-center w-full h-20 p-2 my-1 border border-b-slate-100">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 cursor-pointer" @click="goToPacientPills">
       <div class="h-10 w-10 bg-red-500 rounded-full"></div>
       <div>
         <CardTitle>{{ props.pacient.name }}</CardTitle>
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import type { PropType } from 'vue';
 import type { PacientResponse, UsersResponse } from '~/types/types';
 
@@ -34,5 +35,9 @@ function pacientUsers(users: UsersResponse[]) {
   if (users.length === 0) return 'nenhum cuidador';
 
   return users.length > 1 ? `${users.length} cuidadores` : '1 cuidador';
+}
+
+function goToPacientPills() {
+  navigateTo(`/pacient/${props.pacient.id}/pills`);
 }
 </script>
