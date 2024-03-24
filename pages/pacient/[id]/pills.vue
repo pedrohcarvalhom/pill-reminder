@@ -10,7 +10,9 @@
     <div v-if="!pills.length">
       <PillsEmptyState :selected-pacient="pacient" @created="refresh"/>
     </div>
-    <div v-else>
+    <div v-else class="w-full h-screen">
+      <span class="text-2xl font-bold mb-4">Remédios de <span class="text-red-500">{{ pacient.name }}</span></span>
+      <hr class="my-4"/>
       <MedicinesList :pills="pills"/>
     </div>
   </div>
