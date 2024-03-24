@@ -15,6 +15,16 @@ export default defineEventHandler(async (event) => {
     const pill = await prisma.pill.findFirstOrThrow({
       where: {
         id: Number(pillId)
+      },
+      include: {
+        hour: {
+          select: {
+            checked: true,
+            id: true,
+            checkedAt: true,
+            time: true
+          }
+        }
       }
     })
 

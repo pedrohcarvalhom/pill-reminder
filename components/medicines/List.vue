@@ -24,7 +24,7 @@
     </div>
 
     <CardFooter>
-      <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white">{{ $t('buttons.edit') }}</Button>
+      <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white" @click="redirectToPill(pill.id)">{{ $t('buttons.edit') }}</Button>
     </CardFooter>
   </Card>
 </template>
@@ -39,4 +39,8 @@ const props = defineProps({
     required: true
   }
 })
+
+function redirectToPill(id: string) {
+  navigateTo(`/pills/${id}`);
+}
 </script>

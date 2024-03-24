@@ -2,9 +2,9 @@
   <main class="md:container md:h-screen">
     <div v-if="status == 'success'">
       <header class="mb-10">
-        <nuxt-link to="/">
+        <a @click="router.back">
           <Icon class="w-8 h-8 text-red-500 ml-2 my-1" name="ri:arrow-left-line"></Icon>
-        </nuxt-link>
+        </a>
       </header>
       <div class="mx-4">
         <div class="w-20 h-20 rounded-full bg-red-500"></div>
@@ -25,16 +25,19 @@
           <span class="text-2xl font-bold text-black dark:text-white">{{
             $t('pills.schedule') }}
           </span>
-          <a class="flex items-center justify-center transition-all duration-150 ease-in-out cursor-pointer"
-            @click="editing = true">
+          <a
+            class="flex items-center justify-center transition-all duration-150 ease-in-out cursor-pointer"
+            @click="editing = true"
+          >
             <icon class="text-red-500 mb-1 mr-1 w-5 h-5" name="mdi:pencil-plus-outline" />
-            <span class="text-lg font-bold mr-1 text-red-500 dark:text-red-300">{{
-              editing ? 'Editando...' : $t('buttons.edit') }}
+            <span
+              class="text-lg font-bold mr-1 text-red-500 dark:text-red-300">
+              {{ editing ? 'Editando...' : $t('buttons.edit') }}
             </span>
           </a>
         </div>
         <PillsAddHour :editing="editing" :pill-id="id" @cancel="editing = false" />
-        <pills-schedule :hours="data?.pill.hours" :pill-id="id" />
+        <pills-schedule :hours="data?.pill.hour" :pill-id="id" />
       </div>
     </div>
     <div v-else-if="status == 'pending' || status == 'idle'">
@@ -48,10 +51,10 @@
 
 <script setup lang="ts">
 
+const router = useRouter();
 const { id } = useRoute().params;
 const { data, status } = await useFetch(`/api/pills/${id}`, {
   method: 'GET',
 });
 const editing = ref(false);
-const timeSelected = ref("");
 </script>
