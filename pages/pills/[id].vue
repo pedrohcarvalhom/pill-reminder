@@ -2,7 +2,7 @@
   <main class="md:container md:h-screen">
     <div v-if="status == 'success'">
       <header class="mb-10">
-        <a @click="router.back">
+        <a class="cursor-pointer" @click="router.back">
           <Icon class="w-8 h-8 text-red-500 ml-2 my-1" name="ri:arrow-left-line"></Icon>
         </a>
       </header>
@@ -13,8 +13,9 @@
             <span class="text-2xl font-bold">{{ data?.pill.name }}</span>
             <span class="text-lg font-medium">{{ data?.pill.description || '-' }}</span>
           </div>
-          <div>
-            <Icon class="w-8 h-8" name="emojione:pencil"></Icon>
+          <div class="flex gap-4">
+            <Icon class="w-8 h-8 cursor-pointer text-black dark:text-slate-200 hover:text-red-600 transition-all duration-300" name="gridicons:share-ios" @click="copyLink" />
+            <Icon class="w-8 h-8 text-black dark:text-slate-200" name="gravity-ui:pencil-to-line"></Icon>
           </div>
         </div>
         <div class="flex gap-2 mb-4">
@@ -50,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core';
 
 const router = useRouter();
 const { id } = useRoute().params;
@@ -57,4 +59,15 @@ const { data, status } = await useFetch(`/api/pills/${id}`, {
   method: 'GET',
 });
 const editing = ref(false);
+
+const { copy } = useClipboard();
+const url = `http://localhost:3000/5/pacients/4&createPacient=true`
+async function copyLink() {
+  try {
+    await copy(url);
+    window.alert('Link copiado com sucesso!')
+  } catch (error) {
+    window.alert("Ocorreu um erro ao copiar o link. Tente novamente")
+  }
+}
 </script>
