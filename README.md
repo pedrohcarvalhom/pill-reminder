@@ -19,21 +19,26 @@ De maneira geral, esse é o fluxograma (simples) das relações
 
 
 ## Setup
-[Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-Instale as dependências:
-
-```bash
-# npm
-npm install
+Build the container
+```
+docker compose build
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
+Up the container
 ```
+docker compose up
+```
+
+After that, access the bash using
+```
+docker compose exec web bash
+```
+
+And run
+```
+npx prisma generate dev
+```
+
+Ps.: Don't forget to set the Database enviroment variables.
 
