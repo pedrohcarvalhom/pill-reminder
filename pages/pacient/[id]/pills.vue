@@ -1,5 +1,10 @@
 <template>
   <main class="container">
+    <div>
+      <a class="cursor-pointer" @click="$router.back">
+        <Icon class="w-6 h-6 text-red-500 mb-6" name="ri:arrow-left-line"></Icon>
+      </a>
+    </div>
     <div v-if="status == 'pending'" class="w-full flex justify-center">
       <span class="text-2xl font-bold animate-bounce">Carregando os <span class="text-red-500">remédios...</span></span>
     </div>

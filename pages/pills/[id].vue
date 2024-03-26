@@ -14,7 +14,7 @@
             <span class="text-lg font-medium">{{ data?.pill.description || '-' }}</span>
           </div>
           <div class="flex gap-4">
-            <CommonsActionButtons @share="copyLink" />
+            <CommonsActionButtons />
           </div>
         </div>
         <div class="flex gap-2 mb-4">
@@ -47,23 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core';
-
 const router = useRouter();
 const { id } = useRoute().params;
 const { data, status } = await useFetch(`/api/pills/${id}`, {
   method: 'GET',
 });
 const editing = ref(false);
-
-const { copy } = useClipboard();
-const url = `http://localhost:3000/5/pacients/4&createPacient=true`
-async function copyLink() {
-  try {
-    await copy(url);
-    window.alert('Link copiado com sucesso!')
-  } catch (error) {
-    window.alert("Ocorreu um erro ao copiar o link. Tente novamente")
-  }
-}
 </script>
