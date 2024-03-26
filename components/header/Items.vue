@@ -18,17 +18,6 @@ const visible = ref(false)
 const colorMode = useColorMode()
 const items = ref([
   {
-    label: 'Remédios',
-    items: [
-      {
-        label: 'Adicionar',
-      },
-      {
-        label: 'Editar',
-      }
-    ]
-  },
-  {
     label: 'Tema',
     items: [
       {
@@ -43,6 +32,18 @@ const items = ref([
           colorMode.preference = 'dark'
         }
       }
+    ]
+  },
+  {
+    label: 'Ações',
+    items: [
+      {
+        label: 'Logout',
+        command: async () => {
+          await useSupabaseClient().auth.signOut();
+          navigateTo('/login');
+        },
+      },
     ]
   },
 ]);

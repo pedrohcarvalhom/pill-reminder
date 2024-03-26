@@ -66,11 +66,12 @@ function parsePills(pills: Pill[]) {
   })
 }
 
+const config = useRuntimeConfig();
 const { copy } = useClipboard();
 async function copyLink() {
   if (!isLoaded.value || !user.value) return;
 
-  const url = `http://localhost:3000/${user.value?.id}/pacients/${id}&createPacient=true`
+  const url = `${config.public.baseUrl}/pacient/${id}?createPacient=true&invitedBy=${user.value?.email}`
   try {
     await copy(url);
     window.alert('Compartilhe este link com outros usuários que devam acessar os dados deste paciente!')

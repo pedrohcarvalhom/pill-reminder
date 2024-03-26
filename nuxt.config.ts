@@ -14,6 +14,11 @@ export default defineNuxtConfig({
   devServer: {
     port: 3001
   },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.VITE_BASE_URL,
+    }
+  },
   modules: [
     "@nuxtjs/tailwindcss",
     '@nuxtjs/color-mode',
