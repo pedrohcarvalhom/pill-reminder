@@ -1,15 +1,24 @@
 <template>
-  <div class="container">
-    <div class="flex flex-col justify-center items-center w-[300px] mx-auto">
-      <span>Você deseja cadastrar o paciente
+  <div class="container h-[85vh] flex justify-center">
+    <div v-if="status == 'pending'">
+      <span class="text-2xl font-bold dark:text-white animate-ping">Carregando o paciente...</span>
+    </div>
+    <div v-if="status == 'success'" class="flex flex-col justify-center sm:w-[400px]">
+      <span class="text-center mb-4">Você deseja cadastrar o paciente
         <span class="text-red-500">{{ data?.pacient.name }}</span>?
         A partir de agora, <span class="text-red-500 font-bold">você terá acesso aos remédios e horários de uso
           dele.</span>
       </span>
 
-      <Button @click="registerPacient">
+      <Button variant="outline" class="hover:bg-red-500 dark:bg-slate-50 dark:text-black" @click="registerPacient">
         <Loader2 v-if="loading" class="w-4 h-4 mr-2 animate-spin" /> Cadastrar
       </Button>
+      <Button variant="outline" class="bg-red-500 text-white dark:bg-red-800 mt-2" @click="$router.replace('/')">
+        Cancelar
+      </Button>
+    </div>
+    <div v-if="status == 'error'">
+      <span class="text-2xl font-bold text-red-600 dark:text-red-400">Erro ao carregar o paciente</span>
     </div>
   </div>
 </template>
@@ -23,7 +32,7 @@ const { invitedBy } = useRoute().query;
 const { user } = storeToRefs(useUserStore());
 const loading = ref(false);
 
-const { data } = await useFetch(`/api/pacient/${id}/invitation`, {
+const { data, status } = await useFetch(`/api/pacient/${id}/invitation`, {
   method: 'GET',
   query: {
     email: user.value?.email,
