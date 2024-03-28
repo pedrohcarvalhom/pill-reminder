@@ -23,22 +23,21 @@ export default defineEventHandler(async (event) => {
         id: true
       }
     });
-
-    const userHaveThisPacient = await userAlreadyHaveThisPacient(currentUser.id)
-    if (userHaveThisPacient) {
-      throw createError({ status: 409, message: 'O paciente ja possui este usuário' })
-    }
-
     const pacientToShare = await prisma.pacient.findUniqueOrThrow({
       where: {
         id: Number(pacientId),
+      },
+      include: {
         users: {
-          some: {
-            email: invitedByEmail
+          select: {
+            id: true
           }
         }
       }
     });
+    const userHaveThisPacient = pacientToShare.users.map((user) => user.id).includes(currentUser.id)
+    if (userHaveThisPacient) throw createError({ status: 409, message: 'O paciente ja possui este usuário' })
+
     await prisma.pacient.update({
       where: {
         id: pacientToShare.id
@@ -76,17 +75,3 @@ export default defineEventHandler(async (event) => {
 
   }
 })
-
-async function userAlreadyHaveThisPacient(currentUserId: number): Promise<boolean> {
-  const pacient = await prisma.pacient.findFirst({
-    where: {
-      users: {
-        some: {
-          id: currentUserId
-        }
-      }
-    }
-  })
-
-  return !!pacient;
-}
