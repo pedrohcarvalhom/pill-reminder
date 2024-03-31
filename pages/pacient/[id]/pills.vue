@@ -62,6 +62,7 @@ function parsePills(pills: Pill[]) {
       id: pill.id.toString(),
       hours: pill.hour.map((h) => {
         return {
+          id: h.id,
           time: h.time,
           checked: h.checked,
           checkedAt: h.checkedAt,

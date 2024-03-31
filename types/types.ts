@@ -20,6 +20,7 @@ export interface UsersResponse {
 }
 
 export interface HourResponse {
+  id?: string;
   time?: string;
   checked?: boolean;
   checkedAt?: Date;
