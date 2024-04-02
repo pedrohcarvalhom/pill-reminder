@@ -1,5 +1,6 @@
 <template>
-  <Card v-for="pill in props.pills" :key="pill.id" class="rounded-xl shadow-sm hover:shadow-lg bg-slate-50 border-slate-300 w-full sm:w-[400px] transition-all duration-300">
+  <Card v-for="pill in props.pills" :key="pill.id"
+    class="rounded-xl shadow-sm my-6 hover:shadow-lg bg-slate-50 border-slate-300 w-full sm:w-[400px] transition-all duration-300">
     <div class="flex items-center ml-3">
       <NuxtImg class="w-16 h-16" src="/img/medicine.png" alt="Medicine Icon" />
       <div class="flex-1">
@@ -24,7 +25,8 @@
     </div>
 
     <CardFooter>
-      <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white" @click="redirectToPill(pill.id)">{{ $t('buttons.edit') }}</Button>
+      <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white" @click="redirectToPill(pill.id)">{{
+        $t('buttons.edit') }}</Button>
     </CardFooter>
   </Card>
 </template>
