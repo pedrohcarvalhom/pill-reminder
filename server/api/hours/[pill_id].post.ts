@@ -1,37 +1,37 @@
 import { Prisma } from "@prisma/client"
-import prisma from "../../../client"
+import prisma from "../../client"
 
 export default defineEventHandler(async (event) => {
   const pillId = getRouterParam(event, 'pill_id');
-  const body = await readBody<{ hourId: number, checked: boolean }>(event);
+  const body = await readBody<{ hour: string }>(event);
 
   if (!pillId) {
     throw createError({
       statusCode: 422,
-      message: 'Você deve fornecer um ID para o remédio',
+      message: 'Você deve fornecer o ID do remédio',
     })
   }
 
-  if (!body.hourId) {
+  if (!body.hour) {
     throw createError({
       statusCode: 422,
-      message: 'Não foram fornecidos dados suficientes para atualização.',
+      message: 'Não foram fornecidos dados suficientes para criação.',
     })
   }
 
   try {
-    await prisma.hour.update({
-      where: {
-        id: body.hourId,
-      },
+    const createdHour = await prisma.hour.create({
       data: {
-        checked: body.checked,
-        checkedAt: body.checked ? new Date() : null,
+        time: body.hour,
+        checked: false,
+        checkedAt: null,
+        pillId: Number(pillId)
       }
-    });
+    })
 
     return {
       success: true,
+      hour: createdHour
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

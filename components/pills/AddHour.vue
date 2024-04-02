@@ -3,11 +3,12 @@
     <div v-show="props.editing" class="flex items-center gap-2">
       <Input v-model="hourSelected" class="my-2 ml-auto w-40 bg-red-50" type="time" />
       <div>
-        <a @click="saveHour">
+        <a :class="hourSelected ? 'cursor-pointer' : 'cursor-not-allowed'"
+          class="cursor-pointer transition-all duration-150 ease-in-out" @click="saveHour">
           <Icon class="w-8 h-8 transition-all duration-150 ease-in-out" name="icon-park-solid:check-one"
             :class="hourSelected ? 'text-green-500' : 'text-gray-400'" />
         </a>
-        <a @click="emit('cancel')">
+        <a class="cursor-pointer" @click="emit('cancel')">
           <Icon class="w-8 h-8 text-red-500" name="icon-park-solid:close-one" />
         </a>
       </div>
@@ -16,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { usePillStore } from '@/store/pill';
 const props = defineProps({
   pillId: {
     type: String,
@@ -28,18 +28,20 @@ const props = defineProps({
   },
 })
 const hourSelected = ref("");
-const emit = defineEmits(['cancel']);
-const { addNewHourToPill } = usePillStore();
+const emit = defineEmits(['cancel', 'created']);
 
 async function saveHour() {
+  if (!hourSelected.value) return;
+
   try {
-    const { hour, pillId } = await $fetch(`/api/pills/update_hour/${props.pillId}`, {
+    const { success } = await $fetch(`/api/hours/${props.pillId}`, {
       method: 'POST',
       body: {
         hour: hourSelected.value
       },
     });
-    addNewHourToPill(pillId, hour);
+
+    if (success) emit('created');
   } catch (error) {
     window.alert("Ocorreu um erro ao adicionar a hora. Tente novamente")
   } finally {
