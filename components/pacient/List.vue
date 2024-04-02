@@ -11,7 +11,7 @@
     </div>
     <div v-for="pacient in props.pacients" :key="pacient.id">
       <div class="flex flex-col mx-2 my-1">
-        <PacientCard :pacient="pacient" />
+        <PacientCard :pacient="pacient" @on-deleted="$emit('on-deleted')" />
       </div>
     </div>
   </div>
@@ -33,5 +33,5 @@ const props = defineProps({
 const anyPacientHavePill = computed(() => {
   return props.pacients.some(pacient => pacient.pills.length > 0)
 });
-defineEmits(['created'])
+defineEmits(['created', 'on-deleted']);
 </script>

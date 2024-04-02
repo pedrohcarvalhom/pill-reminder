@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="flex gap-4">
-      <PacientDropdown />
+      <PacientDropdown @on-delete="onDeleteClicked" />
     </div>
   </Card>
 </template>
@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import type { PropType } from 'vue';
+import { usePacientService } from '~/composables/usePacientService';
 import type { PacientResponse, UsersResponse } from '~/types/types';
 
 const props = defineProps({
@@ -25,6 +26,8 @@ const props = defineProps({
     required: true
   }
 })
+const emit = defineEmits(['on-deleted']);
+const { deletePacient } = usePacientService();
 
 function pluralizePill(quantity: number) {
   if (quantity === 0) return 'remédios';
@@ -39,5 +42,17 @@ function pacientUsers(users: UsersResponse[]) {
 
 function goToPacientPills() {
   navigateTo(`/pacient/${props.pacient.id}/pills`);
+}
+
+async function onDeleteClicked() {
+  try {
+    await deletePacient(Number(props.pacient.id));
+    window.alert('Paciente deletado com sucesso!');
+
+    emit('on-deleted');
+  } catch (error) {
+    console.error(error);
+    window.alert("Ocorreu um erro ao deletar o paciente. Tente novamente");
+  }
 }
 </script>

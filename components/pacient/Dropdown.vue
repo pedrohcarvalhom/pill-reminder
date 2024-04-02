@@ -5,7 +5,7 @@
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuItem>Remédios</DropdownMenuItem>
-      <DropdownMenuItem>Editar</DropdownMenuItem>
+      <DropdownMenuItem @click="$emit('on-delete')">Excluir</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
@@ -16,5 +16,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/components/ui/dropdown-menu';
+
+defineEmits(['on-delete']);
 </script>

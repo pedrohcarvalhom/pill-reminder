@@ -1,9 +1,9 @@
 <template>
   <main class="md:container">
-    <CommonsLoadingIndicator v-if="status === 'pending'" />
-    <HomeEmptyState v-else-if="!pacients.length" @created="refresh" />
+    <PacientLoadingSkeleton v-if="status == 'pending'" />
+    <HomeEmptyState v-else-if="status == 'success' && !pacients.length" @created="refresh" />
     <div v-else>
-      <PacientList :pacients="pacients" @created="refresh" />
+      <PacientList :pacients="pacients" @created="refresh" @on-deleted="refresh" />
     </div>
   </main>
 </template>
@@ -11,7 +11,6 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store/user';
 import type { PacientResponse } from '@/types/types'
-import type { CommonsLoadingIndicator } from '#build/components';
 
 const { isLoaded, email } = storeToRefs(useUserStore());
 const pacients = ref<PacientResponse[]>([]);
