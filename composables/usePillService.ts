@@ -1,12 +1,15 @@
 
 
-const updateCheckedHour = async (checked: boolean, hourId: number) => {
-  await $fetch(`/api/hours/${hourId}`, {
-    method: 'PUT',
+const updateCheckedHour = async (checked: boolean, hourId: number, pillId: number) => {
+  const { success } = await $fetch(`/api/pills/update_hour/${pillId}`, {
+    method: 'POST',
     body: {
-      hour: checked
+      hourId,
+      checked
     },
   })
+
+  return success;
 }
 
 export const usePillService = () => {
