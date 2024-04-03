@@ -1,5 +1,5 @@
 <template>
-  <div v-if="anyPacientHavePill">
+  <div v-if="anyPacientHavePill && props.pacients.length">
     <div class="flex justify-between w-full items-center p-2">
       <div class="flex flex-col w-[300px] md:w-[600px]">
         <span class="ml-2 text-2xl font-semibold">Seus pacientes</span>

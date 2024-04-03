@@ -15,7 +15,7 @@
       v-if="status == 'pending'"
       class="w-full flex justify-center"
     >
-      <span class="text-2xl font-bold animate-bounce">Carregando os <span class="text-red-500">remédios...</span></span>
+      <pills-loading-skeleton />
     </div>
     <div
       v-if="status == 'error'"
