@@ -1,8 +1,12 @@
 <template>
   <div class="card flex justify-content-center">
     <PrimeDropdown
-      v-model="selectedPacient" :options="pacientOptions" option-label="name" option-value="id"
-      placeholder="Selecione o paciente" class="w-full md:w-14rem"
+      v-model="selectedPacient"
+      :options="pacientOptions"
+      option-label="name"
+      option-value="id"
+      placeholder="Selecione o paciente"
+      class="w-full md:w-14rem"
       :pt="{ root: ({ }) => { return 'border border-stone-200' } }"
     />
   </div>

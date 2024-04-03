@@ -1,9 +1,16 @@
 <template>
   <main class="md:container">
     <PacientLoadingSkeleton v-if="status == 'pending'" />
-    <HomeEmptyState v-else-if="status == 'success' && !pacients.length" @created="refresh" />
+    <HomeEmptyState
+      v-else-if="status == 'success' && !pacients.length"
+      @created="refresh"
+    />
     <div v-else>
-      <PacientList :pacients="pacients" @created="refresh" @on-deleted="refresh" />
+      <PacientList
+        :pacients="pacients"
+        @created="refresh"
+        @on-deleted="refresh"
+      />
     </div>
   </main>
 </template>

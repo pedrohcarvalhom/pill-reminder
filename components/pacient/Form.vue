@@ -1,6 +1,9 @@
 <template>
   <form @submit="onSubmit">
-    <FormField v-slot="{ componentField }" name="name">
+    <FormField
+      v-slot="{ componentField }"
+      name="name"
+    >
       <FormItem class="mt-4">
         <FormLabel>Nome do paciente</FormLabel>
         <FormControl>
@@ -9,11 +12,18 @@
         <FormMessage />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ componentField }" name="description">
+    <FormField
+      v-slot="{ componentField }"
+      name="description"
+    >
       <FormItem class="mt-10 flex flex-col">
         <FormLabel>Descreva o seu paciente</FormLabel>
         <FormControl>
-          <Textarea class="rounded-md p-2" v-bind="componentField" placeholder="Informações úteis para se lembrar..." />
+          <Textarea
+            class="rounded-md p-2"
+            v-bind="componentField"
+            placeholder="Informações úteis para se lembrar..."
+          />
         </FormControl>
         <FormMessage />
       </FormItem>

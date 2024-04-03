@@ -1,19 +1,19 @@
 <template>
   <AlertDialog v-model:open="open">
     <AlertDialogTrigger>
-      <slot name="trigger"></slot>
+      <slot name="trigger" />
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle>
-          <slot name="title"></slot>
+          <slot name="title" />
         </AlertDialogTitle>
         <AlertDialogDescription>
-          <slot name="description"></slot>
+          <slot name="description" />
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <slot name="footer-actions"></slot>
+        <slot name="footer-actions" />
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

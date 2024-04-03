@@ -1,11 +1,16 @@
 <template>
   <Card class="flex justify-between items-center w-full h-20 p-2 my-1 border border-b-slate-100">
-    <div class="flex items-center gap-4 cursor-pointer" @click="goToPacientPills">
-      <div class="h-10 w-10 bg-red-500 rounded-full"></div>
+    <div
+      class="flex items-center gap-4 cursor-pointer"
+      @click="goToPacientPills"
+    >
+      <div class="h-10 w-10 bg-red-500 rounded-full" />
       <div>
         <CardTitle>{{ props.pacient.name }}</CardTitle>
-        <CardDescription class="mt-2">{{ props.pacient.pills.length }} {{
-          pluralizePill(props.pacient.pills.length) }} • {{ pacientUsers(props.pacient.users) }} </CardDescription>
+        <CardDescription class="mt-2">
+          {{ props.pacient.pills.length }} {{
+            pluralizePill(props.pacient.pills.length) }} • {{ pacientUsers(props.pacient.users) }}
+        </CardDescription>
       </div>
     </div>
     <div class="flex gap-4">

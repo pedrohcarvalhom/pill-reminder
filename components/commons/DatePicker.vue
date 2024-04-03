@@ -5,10 +5,19 @@
       <span class="year">{{ year }}</span>
     </div>
     <div class="calendar-grid">
-      <div v-for="day in daysOfWeek" :key="day" class="day-of-week">
+      <div
+        v-for="day in daysOfWeek"
+        :key="day"
+        class="day-of-week"
+      >
         {{ day }}
       </div>
-      <div v-for="day in days" :key="day.id" class="day" :class="{ today: day.isToday }">
+      <div
+        v-for="day in days"
+        :key="day.id"
+        class="day"
+        :class="{ today: day.isToday }"
+      >
         {{ day.number }}
       </div>
     </div>

@@ -4,28 +4,53 @@
   </CardHeader>
   <CardContent>
     <form @submit="onSubmit">
-      <FormField v-slot="{ componentField }" name="email">
+      <FormField
+        v-slot="{ componentField }"
+        name="email"
+      >
         <FormItem class="mt-4">
           <FormLabel>{{ $t('register.form.email') }}</FormLabel>
           <FormControl>
-            <Input class="dark:bg-gray-600" type="email" v-bind="componentField" />
+            <Input
+              class="dark:bg-gray-600"
+              type="email"
+              v-bind="componentField"
+            />
           </FormControl>
           <FormMessage />
         </FormItem>
       </FormField>
-      <FormField v-slot="{ componentField }" name="password">
+      <FormField
+        v-slot="{ componentField }"
+        name="password"
+      >
         <FormItem class="mt-4">
           <FormLabel>{{ $t('register.form.password') }}</FormLabel>
           <FormControl>
-            <Input class="dark:bg-gray-600" type="password" v-bind="componentField" />
+            <Input
+              class="dark:bg-gray-600"
+              type="password"
+              v-bind="componentField"
+            />
           </FormControl>
           <FormMessage />
         </FormItem>
       </FormField>
       <div class="flex flex-col mt-4">
-        <Button class="bg-red-950 dark:bg-gray-200 w-1/2 mx-auto" type="submit">Login</Button>
-        <Button variant="ghost" class="p-0 mt-1" @click="$emit('dontHaveAccount')">Não possui uma conta?
-          Registre-se</Button>
+        <Button
+          class="bg-red-950 dark:bg-gray-200 w-1/2 mx-auto"
+          type="submit"
+        >
+          Login
+        </Button>
+        <Button
+          variant="ghost"
+          class="p-0 mt-1"
+          @click="$emit('dontHaveAccount')"
+        >
+          Não possui uma conta?
+          Registre-se
+        </Button>
       </div>
     </form>
   </CardContent>
@@ -44,8 +69,8 @@ const router = useRouter()
 const supabase = useSupabaseClient();
 const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
-  email: z.string({ required_error: t('register.form.emailError') }).email(),
-  password: z.string({ required_error: t('register.form.passwordError') }).min(6),
+  email: z.string({ required_error: t('register.form.emailError') }).email({ message: "Email inválido" }),
+  password: z.string({ required_error: t('register.form.passwordError') }).min(6, { message: "Senha inválida" }),
 }))
 
 const form = useForm({

@@ -7,11 +7,20 @@
           Clique em algum paciente para acessar mais informações
         </span>
       </div>
-      <PacientDialog :button-label="'+ Novo paciente'" @created="$emit('created')" />
+      <PacientDialog
+        :button-label="'+ Novo paciente'"
+        @created="$emit('created')"
+      />
     </div>
-    <div v-for="pacient in props.pacients" :key="pacient.id">
+    <div
+      v-for="pacient in props.pacients"
+      :key="pacient.id"
+    >
       <div class="flex flex-col mx-2 my-1">
-        <PacientCard :pacient="pacient" @on-deleted="$emit('on-deleted')" />
+        <PacientCard
+          :pacient="pacient"
+          @on-deleted="$emit('on-deleted')"
+        />
       </div>
     </div>
   </div>

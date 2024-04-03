@@ -1,9 +1,17 @@
 <template>
   <Card class="w-full bg-gray-100 shadow-lg dark:bg-gray-100">
     <CardContent class="flex flex-col py-2">
-      <div v-for="(hour, index) in props.hours" :key="index" class="flex justify-between my-3">
-        <checkbox-label :id="hour.id!" :is-checked="hour.checked" :label="hour.time!"
-          @update:checked="debouncedSaveCheck" />
+      <div
+        v-for="(hour, index) in props.hours"
+        :key="index"
+        class="flex justify-between my-3"
+      >
+        <checkbox-label
+          :id="hour.id!"
+          :is-checked="hour.checked"
+          :label="hour.time!"
+          @update:checked="debouncedSaveCheck"
+        />
       </div>
     </CardContent>
   </Card>
@@ -39,7 +47,7 @@ async function saveCheck({ checked, id }: { checked: boolean, id: number }) {
     window.alert("Ocorreu um erro ao atualizar o horário. Tente novamente")
     console.error(err);
   }
-};
+}
 
 const emit = defineEmits(['updated']);
 </script>

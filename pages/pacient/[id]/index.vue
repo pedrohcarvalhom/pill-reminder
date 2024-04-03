@@ -8,7 +8,10 @@
       </span>
 
       <Button @click="registerPacient">
-        <Loader2 v-if="loading" class="w-4 h-4 mr-2 animate-spin" /> Cadastrar
+        <Loader2
+          v-if="loading"
+          class="w-4 h-4 mr-2 animate-spin"
+        /> Cadastrar
       </Button>
     </div>
   </div>

@@ -1,21 +1,42 @@
 <template>
   <main class="container">
     <div>
-      <a class="cursor-pointer" @click="$router.back">
-        <Icon class="w-6 h-6 text-red-500 mb-6" name="ri:arrow-left-line"></Icon>
+      <a
+        class="cursor-pointer"
+        @click="$router.back"
+      >
+        <Icon
+          class="w-6 h-6 text-red-500 mb-6"
+          name="ri:arrow-left-line"
+        />
       </a>
     </div>
-    <div v-if="status == 'pending'" class="w-full flex justify-center">
+    <div
+      v-if="status == 'pending'"
+      class="w-full flex justify-center"
+    >
       <span class="text-2xl font-bold animate-bounce">Carregando os <span class="text-red-500">remédios...</span></span>
     </div>
-    <div v-if="status == 'error'" class="w-full flex justify-center">
+    <div
+      v-if="status == 'error'"
+      class="w-full flex justify-center"
+    >
       <span class="text-2xl font-bold"><span class="text-red-500">Erro</span> ao carregar os remédios</span>
     </div>
-    <div v-if="status == 'success'" class="w-full flex justify-center">
+    <div
+      v-if="status == 'success'"
+      class="w-full flex justify-center"
+    >
       <div v-if="!pills.length">
-        <PillsEmptyState :selected-pacient="pacient" @created="refresh" />
+        <PillsEmptyState
+          :selected-pacient="pacient"
+          @created="refresh"
+        />
       </div>
-      <div v-else class="w-full h-screen">
+      <div
+        v-else
+        class="w-full h-screen"
+      >
         <div class="flex justify-between items-center">
           <div>
             <span class="block text-2xl font-bold mb-1">Remédios de
@@ -27,7 +48,7 @@
             <CommonsActionButtons @share="copyLink" />
           </div>
         </div>
-        <hr class="my-4" />
+        <hr class="my-4">
         <MedicinesList :pills="pills" />
       </div>
     </div>

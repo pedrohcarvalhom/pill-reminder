@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen bg">
-    <slot/>
+    <slot />
   </div>
 </template>
 

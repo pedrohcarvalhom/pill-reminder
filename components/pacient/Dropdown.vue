@@ -1,11 +1,16 @@
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger>
-      <Icon class="h-6 w-6 hover:text-red-600 transition-all duration-300 ease-in-out" name="ic:baseline-menu" />
+      <Icon
+        class="h-6 w-6 hover:text-red-600 transition-all duration-300 ease-in-out"
+        name="ic:baseline-menu"
+      />
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuItem>Remédios</DropdownMenuItem>
-      <DropdownMenuItem @click="$emit('on-delete')">Excluir</DropdownMenuItem>
+      <DropdownMenuItem @click="$emit('on-delete')">
+        Excluir
+      </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>

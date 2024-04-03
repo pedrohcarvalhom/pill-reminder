@@ -10,7 +10,7 @@ interface PillRequest {
   description?: string,
   when?: number;
   pacient: number;
-};
+}
 
 export default defineEventHandler(async (event) => {
   const body: PillRequest = await readBody(event)

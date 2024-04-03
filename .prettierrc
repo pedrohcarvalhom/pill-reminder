@@ -4,5 +4,6 @@
   "vueIndentScriptAndStyle": true,
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "htmlWhitespaceSensitivity": "ignore"
 }

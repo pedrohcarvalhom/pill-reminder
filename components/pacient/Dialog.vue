@@ -3,30 +3,47 @@
     <template #trigger>
       <Button>{{ props.buttonLabel }}</Button>
     </template>
-    <template #title>Cadastro de paciente</template>
+    <template #title>
+      Cadastro de paciente
+    </template>
     <template #description>
       <form @submit.prevent="onSubmit">
-        <FormField v-slot="{ componentField }" name="name">
+        <FormField
+          v-slot="{ componentField }"
+          name="name"
+        >
           <FormItem class="mt-4">
             <FormControl>
-              <Input v-bind="componentField" placeholder="Nome do paciente" />
+              <Input
+                v-bind="componentField"
+                placeholder="Nome do paciente"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
         </FormField>
-        <FormField v-slot="{ componentField }" name="description">
+        <FormField
+          v-slot="{ componentField }"
+          name="description"
+        >
           <FormItem class="mt-6 flex flex-col">
             <FormLabel>Descreva o seu paciente</FormLabel>
             <FormControl>
-              <Textarea class="rounded-md p-2" v-bind="componentField"
-                placeholder="Informações úteis para se lembrar..." />
+              <Textarea
+                class="rounded-md p-2"
+                v-bind="componentField"
+                placeholder="Informações úteis para se lembrar..."
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
         </FormField>
         <div class="flex items-center mt-4 gap-2">
           <Button type="submit">
-            <Loader2 v-if="isLoading" class="w-4 h-4 mr-2 animate-spin" />
+            <Loader2
+              v-if="isLoading"
+              class="w-4 h-4 mr-2 animate-spin"
+            />
             Cadastrar
           </Button>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
@@ -91,6 +108,6 @@ const onSubmit = form.handleSubmit(async (values) => {
     window.alert("Ocorreu um erro ao cadastrar o paciente. Tente novamente")
   } finally {
     isLoading.value = false;
-  };
+  }
 });
 </script>

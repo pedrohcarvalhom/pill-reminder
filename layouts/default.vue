@@ -2,7 +2,7 @@
   <header class="mb-6">
     <HeaderNavigation />
   </header>
-  <slot/>
+  <slot />
 </template>
 
 <style>
