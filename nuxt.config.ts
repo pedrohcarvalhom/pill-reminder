@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       ]
     },
   },
+  image: {
+    inject: true
+  },
   devServer: {
     port: 3001
   },

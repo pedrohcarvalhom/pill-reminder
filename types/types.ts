@@ -43,3 +43,12 @@ export interface PacientResponse {
   users: UsersResponse[];
   pills: PillResponse[];
 }
+
+export const MeasureEnum = {
+  ml: 'ml',
+  gr: 'gr',
+  mg: 'mg',
+  full: 'remédios',
+  half: 'pela metade',
+  drops: 'gotas',
+}

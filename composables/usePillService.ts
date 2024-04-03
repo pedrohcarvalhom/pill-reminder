@@ -25,9 +25,16 @@ const updatePillInfo = async (name: string, description: string, pillId: number)
   })
 }
 
+const deletePill = async (pillId: number) => {
+  return await $fetch(`/api/pills/${pillId}`, {
+    method: 'DELETE',
+  });
+}
+
 export const usePillService = () => {
   return {
     updateCheckedHour,
-    updatePillInfo
+    updatePillInfo,
+    deletePill
   }
 }

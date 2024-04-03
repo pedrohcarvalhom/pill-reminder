@@ -7,7 +7,6 @@
       />
     </DropdownMenuTrigger>
     <DropdownMenuContent>
-      <DropdownMenuItem>Remédios</DropdownMenuItem>
       <DropdownMenuItem @click="$emit('on-delete')">
         Excluir
       </DropdownMenuItem>

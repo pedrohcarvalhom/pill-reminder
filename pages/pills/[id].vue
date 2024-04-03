@@ -2,23 +2,14 @@
   <main class="md:container md:h-screen">
     <div v-if="status == 'success'">
       <header class="mb-10">
-        <a
-          class="cursor-pointer"
-          @click="router.replace('/')"
-        >
-          <Icon
-            class="w-8 h-8 text-red-500 ml-2 my-1"
-            name="ri:arrow-left-line"
-          />
+        <a class="cursor-pointer" @click="router.replace('/')">
+          <Icon class="w-8 h-8 text-red-500 ml-2 my-1" name="ri:arrow-left-line" />
         </a>
       </header>
       <div class="mx-4">
-        <div class="w-20 h-20 rounded-full bg-red-500" />
+        <img class="w-32 h-32" src="/img/pill.png" alt="Pills">
         <div class="flex items-center justify-between my-8">
-          <div
-            v-if="!editingPill"
-            class="flex flex-col"
-          >
+          <div v-if="!editingPill" class="flex flex-col">
             <span class="text-2xl font-bold">{{ data?.pill.name }}</span>
             <span class="text-lg font-medium">{{ data?.pill.description || '-' }}</span>
           </div>
@@ -44,6 +35,7 @@
           <pills-time :quantity="data?.pill.when" />
         </div>
         <pills-schedule-edit
+          :disable-editing="editingPill"
           @on-edit-schedule="editing = true"
           @on-create="onCreatedHour"
         />
