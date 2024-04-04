@@ -2,7 +2,7 @@ import { Prisma } from "@prisma/client"
 import prisma from "../../client"
 
 export default defineEventHandler(async (event) => {
-  const pillId = getRouterParam(event, 'id')
+  const pillId = Number(getRouterParam(event, 'id'))
 
   if (!pillId) {
     throw createError({
@@ -12,9 +12,10 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    await clearHourConfirmation(pillId);
     const pill = await prisma.pill.findFirstOrThrow({
       where: {
-        id: Number(pillId)
+        id: pillId
       },
       include: {
         hour: {
@@ -45,3 +46,51 @@ export default defineEventHandler(async (event) => {
     }
   }
 })
+
+async function clearHourConfirmation(pillId: number) {
+  const { today, yesterday } = getTodayAndYesterday();
+
+  const hours = await prisma.hour.findMany({
+    where: {
+      pillId,
+      checked: true,
+      checkedAt: {
+        gte: new Date(yesterday),
+        lt: new Date(today)
+      }
+    }
+  });
+
+  if (!hours.length) return;
+
+  await prisma.hour.updateMany({
+    where: {
+      pillId,
+      checked: true,
+      checkedAt: {
+        gte: yesterday,
+        lt: today
+      }
+    },
+    data: {
+      checked: false,
+      checkedAt: null
+    }
+  });
+}
+
+function getTodayAndYesterday() {
+  const today = new Date().toLocaleDateString('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+  });
+  const todayDate = new Date(today);
+  const yesterdayDate = new Date(todayDate);
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  const yesterday = yesterdayDate.toLocaleDateString('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+  });
+  return {
+    today,
+    yesterday
+  }
+}

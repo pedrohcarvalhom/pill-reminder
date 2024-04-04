@@ -22,6 +22,9 @@ const prisma = new PrismaClient({
 })
 
 prisma.$on('query', (e) => {
+  // clear this if you want log in dev
+  if (process.env.ENV !== 'production') return;
+
   console.log('Query: ' + e.query)
   console.log('Params: ' + e.params)
   console.log('Duration: ' + e.duration + 'ms')
