@@ -46,11 +46,8 @@
         />
       </div>
     </div>
-    <div
-      v-else-if="status == 'pending'"
-      class="w-full flex justify-center items-center h-screen animate-ping duration-1000"
-    >
-      <span class="text-2xl font-bold dark:text-white">Carregando o seu remedio...</span>
+    <div v-else-if="status == 'pending'" class="w-full flex justify-center items-center h-screen">
+      <pills-selected-loading-skeleton />
     </div>
     <div v-else-if="status == 'error'">
       <span class="text-2xl font-bold text-red-600 dark:text-red-400">Erro ao carregar o seu remedio</span>

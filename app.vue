@@ -1,7 +1,7 @@
 <template lang="pug">
 nuxt-layout
   div
-    NuxtLoadingIndicator
+    NuxtLoadingIndicator(color="red" height="8")
     NuxtPage
 </template>
 
