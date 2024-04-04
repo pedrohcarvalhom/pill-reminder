@@ -40,6 +40,7 @@
   },
   "register": {
     "name": "Crie sua conta",
+    "dontHaveAcount": "Não tem uma conta? Registre-se",
     "form": {
       "title": "Cadastrar",
       "email": "Email",
@@ -49,5 +50,13 @@
       "password": "Senha",
       "passwordError": "Por favor, digite uma senha"
     }
+  },
+  "errors": {
+    "user-not-found": "Usuário não encontrado",
+    "confirm-email": "Por favor, confirme o email",
+    "email-already-in-use": "Email em uso",
+    "weak-password": "Senha fraca",
+    "invalid-email": "Email inválido",
+    "wrong-password": "Senha ou email inválido"
   }
 }

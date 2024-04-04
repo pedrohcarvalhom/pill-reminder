@@ -52,6 +52,8 @@ const items = ref([
         label: 'Logout',
         command: async () => {
           await useSupabaseClient().auth.signOut();
+          clearNuxtData();
+          clearNuxtState();
           navigateTo('/login');
         },
       },

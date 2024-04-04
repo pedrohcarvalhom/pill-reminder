@@ -44,7 +44,7 @@
               v-if="isLoading"
               class="w-4 h-4 mr-2 animate-spin"
             />
-            Cadastrar
+            {{ $t('register.form.title') }}
           </Button>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
         </div>

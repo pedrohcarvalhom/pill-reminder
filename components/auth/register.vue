@@ -103,7 +103,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     return;
   }
 
-  window.alert("Usuário criado com sucesso!")
+  window.alert("Usuário criado com sucesso! Por favor confirme seu email cadastrado.")
   emit('haveAccount')
 })
 

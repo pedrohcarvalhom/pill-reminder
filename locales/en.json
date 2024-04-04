@@ -40,6 +40,7 @@
   },
   "register": {
     "name": "Create your account",
+    "dontHaveAcount": "Don't have an account? Register",
     "form": {
       "title": "Register",
       "email": "Email",
@@ -49,5 +50,13 @@
       "password": "Password",
       "passwordError": "Please enter a password"
     }
+  },
+  "errors": {
+    "user-not-found": "User not found",
+    "confirm-email": "Please, confirm your email",
+    "email-already-in-use": "Email already in use",
+    "weak-password": "Weak password",
+    "invalid-email": "Invalid email",
+    "wrong-password": "Wrong password or email"
   }
 }

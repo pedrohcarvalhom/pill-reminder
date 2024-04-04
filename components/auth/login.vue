@@ -37,19 +37,12 @@
         </FormItem>
       </FormField>
       <div class="flex flex-col mt-4">
-        <Button
-          class="bg-red-950 dark:bg-gray-200 w-1/2 mx-auto"
-          type="submit"
-        >
+        <Button class="bg-red-950 dark:bg-gray-200 w-1/2 mx-auto" type="submit">
+          <Loader2 v-if="isLoading" class="w-4 h-4 mr-2 animate-spin" />
           Login
         </Button>
-        <Button
-          variant="ghost"
-          class="p-0 mt-1"
-          @click="$emit('dontHaveAccount')"
-        >
-          Não possui uma conta?
-          Registre-se
+        <Button variant="ghost" class="p-0 mt-1" @click="$emit('dontHaveAccount')">
+          {{ $t('register.dontHaveAcount') }}
         </Button>
       </div>
     </form>
@@ -63,7 +56,9 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { useUserStore } from '~/store/user'
+import { Loader2 } from 'lucide-vue-next'
 
+const isLoading = ref(false);
 const userStore = useUserStore();
 const router = useRouter()
 const supabase = useSupabaseClient();
@@ -79,21 +74,22 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
+    isLoading.value = true
     const { data, error: supabaseError } = await loginSupabase(values)
     const { user } = await loginApi(values)
 
     if (supabaseError?.message == 'Email not confirmed') {
-      window.alert('Por favor confirme seu email')
+      window.alert(t('errors.confirm-email'))
       return
     }
 
     if (!user) {
-      window.alert('Usuário não encontrado')
+      window.alert(t('errors.user-not-found'))
       return;
     }
 
     if (supabaseError?.status) {
-      window.alert('Email ou senha inválidos')
+      window.alert(t('errors.wrong-password'))
       return;
     }
 
@@ -114,6 +110,8 @@ const onSubmit = form.handleSubmit(async (values) => {
     if (error instanceof Error) {
       window.alert(error.message)
     }
+  } finally {
+    isLoading.value = false
   }
 })
 
