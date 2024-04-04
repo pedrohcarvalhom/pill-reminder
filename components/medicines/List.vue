@@ -36,12 +36,10 @@
     </div>
 
     <CardFooter class="flex gap-2">
-      <Button variant="outline" class="w-full hover:bg-green-500 hover:text-white" @click="redirectToPill(pill.id)">
-        {{ $t('buttons.edit') }}
-      </Button>
-      <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white" @click="onDeleteClicked(Number(pill.id))">
-        {{ $t('buttons.remove') }}
-      </Button>
+      <CommonsConfirmationDialog
+        :on-confirm-clicked="() => onDeleteClicked(Number(pill.id))"
+        @on-edit="redirectToPill(pill.id)"
+      />
     </CardFooter>
   </Card>
 </template>
