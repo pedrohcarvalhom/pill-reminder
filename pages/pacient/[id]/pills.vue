@@ -31,7 +31,17 @@
           </div>
         </div>
         <hr class="my-4">
+        <div class="w-full flex justify-end">
+          <Button class="ml-auto" @click="isRegisteringPill = true">
+            {{ $t('pills.newPill') }}
+          </Button>
+        </div>
         <MedicinesList :pills="pills" @on-deleted="refresh" />
+        <PillsCreate
+          v-model="isRegisteringPill"
+          :pacients="[pacient]"
+          @created="isRegisteringPill = false; refresh()"
+        />
       </div>
     </div>
   </main>
@@ -46,6 +56,7 @@ const { id } = useRoute().params;
 const { user, isLoaded } = storeToRefs(useUserStore());
 const pills = ref<PillResponse[]>([]);
 const pacient = ref();
+const isRegisteringPill = ref(false);
 const { status, refresh } = await useFetch(`/api/pacient/${id}/pills`, {
   method: 'GET',
   transform: ({ pacient: pacientRequest, pills: pillsRequest }) => {
@@ -83,7 +94,7 @@ async function copyLink() {
   const url = `${config.public.baseUrl}/pacient/${id}?createPacient=true&invitedBy=${user.value?.email}`
   try {
     await copy(url);
-    window.alert('Compartilhe este link com outros usuários que devam acessar os dados deste paciente!')
+    window.alert('Link copiado com sucesso!\nCompartilhe ele com outros usuários que devam acessar os dados deste paciente.')
   } catch (error) {
     window.alert("Ocorreu um erro ao copiar o link. Tente novamente")
   }

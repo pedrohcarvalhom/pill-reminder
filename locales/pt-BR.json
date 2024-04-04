@@ -28,7 +28,8 @@
       "nameError": "Por favor, digite o nome do remédio",
       "nameLength": "Nome muito curto",
       "nameLengthPlus": "Nome muito longo",
-      "quantity": "Quantidade (por dia)",
+      "quantity": "Quantas vezes por dia?",
+      "quantityHint": "Quantas vezes você precisa dar o remédio, por dia, para o paciente?",
       "quantityError": "Por favor, digite a quantidade de remédios",
       "invalidQtd": "Quantidade inválida",
       "measure": "Unidade de medida",
@@ -36,7 +37,8 @@
       "time": "Horário",
       "timeError": "Por favor, digite o horário",
       "timeDescription": "Você poderá adicionar mais horários depois"
-    }
+    },
+    "newPill": "+ Novo remédio"
   },
   "register": {
     "name": "Crie sua conta",

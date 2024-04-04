@@ -75,6 +75,7 @@
               v-bind="componentField"
             />
           </FormControl>
+          <FormDescription>{{ $t('pills.form.quantityHint') }}</FormDescription>
           <FormMessage />
         </FormItem>
       </FormField>
@@ -110,10 +111,8 @@
           <FormMessage />
         </FormItem>
       </FormField>
-      <Button
-        class="mt-4"
-        type="submit"
-      >
+      <Button class="mt-4" type="submit" :disabled="isLoading">
+        <Loader2 v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
         {{ $t('buttons.save') }}
       </Button>
     </form>
@@ -138,6 +137,7 @@ import {
 } from '@/components/ui/form'
 import { useUserStore } from '~/store/user'
 import type { PacientResponse } from '~/types/types'
+import { Loader2 } from 'lucide-vue-next'
 
 const emit = defineEmits(['created'])
 const props = defineProps({
@@ -150,10 +150,12 @@ const props = defineProps({
     default: undefined
   }
 })
+
 const isRegisteringPill = defineModel({
   type: Boolean,
   default: false,
 })
+const isLoading = ref(false);
 const { t } = useI18n();
 const formSchema = toTypedSchema(z.object({
   name: z.string({ required_error: t('pills.form.nameError') }).min(2, t('pills.form.nameLength')).max(50, t('pills.form.nameLengthPlus')),
@@ -172,6 +174,7 @@ const form = useForm({
 const userStore = useUserStore()
 const onSubmit = form.handleSubmit(async (values) => {
   try {
+    isLoading.value = true;
     const body = {
       ...values,
     }
@@ -183,11 +186,14 @@ const onSubmit = form.handleSubmit(async (values) => {
       }
     });
 
-    emit('created')
+    window.alert("Remédio cadastrado com sucesso! Por favor, recarregue a página para vê-los")
+    emit('created');
   } catch (error) {
     if (error instanceof Error) {
       window.alert(error.message);
     }
+  } finally {
+    isLoading.value = false
   }
 
 

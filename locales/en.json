@@ -28,7 +28,8 @@
       "nameError": "Please enter the name of the pill",
       "nameLength": "Nome too short",
       "nameLengthPlus": "Nome too long",
-      "quantity": "Quantity (for each day)",
+      "quantity": "How many times at day?",
+      "quantityHint": "How many times at day you need to take the pill to your pacient?",
       "quantityError": "Please enter the quantity of pills",
       "invalidQtd": "Invalid quantity",
       "measure": "Measurement unit",
@@ -36,7 +37,8 @@
       "time": "Time to take",
       "timeError": "Please enter the time to take",
       "timeDescription": "You can add more times later"
-    }
+    },
+    "newPill": "+ New pill"
   },
   "register": {
     "name": "Create your account",
