@@ -1,37 +1,52 @@
-
 <template>
-  <Button variant="outline" class="w-full hover:bg-green-500 hover:text-white" @click="emit('on-edit')">
-    {{ $t('buttons.edit') }}
-  </Button>
-  <Button variant="outline" class="w-full hover:bg-red-500 hover:text-white" @click="open = true">
-    {{ $t('buttons.remove') }}
-  </Button>
-  <CommonsBaseDialog v-model:open="open">
-    <template #title>
-      Deseja excluir este remédio?
-    </template>
-    <template #description>
-      <span>Esta ação não poderá ser desfeita. Não é possível recuperar o seu remédio novamente.</span>
-      <div class="flex items-center justify-end mt-4 gap-2">
-        <Button @click="props.onConfirmClicked">
-          <Loader2 v-if="isLoading" class="w-4 h-4 mr-2 animate-spin" />
-          {{ $t('buttons.remove') }}
-        </Button>
-        <AlertDialogCancel>{{ $t('buttons.cancel') }}</AlertDialogCancel>
-      </div>
-    </template>
-  </CommonsBaseDialog>
+  <AlertDialog v-model:open="open">
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>
+          <span> {{ props.title }} </span>
+        </AlertDialogTitle>
+        <AlertDialogDescription>
+          <span> {{ props.description }} </span>
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <div class="flex items-center justify-end mt-4 gap-2">
+          <Button @click="emit('on-confirm')" :disabled="props.loading">
+            <Loader2 v-if="props.loading" class="w-4 h-4 mr-2 animate-spin" />
+            {{ $t('buttons.save') }}
+          </Button>
+          <AlertDialogCancel>{{ $t('buttons.cancel') }}</AlertDialogCancel>
+        </div>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
 </template>
 
 <script setup lang="ts">
 import { Loader2 } from 'lucide-vue-next';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+
 const props = defineProps({
-  onConfirmClicked: {
-    type: Function,
+  title: {
+    type: String,
     required: true
   },
+  description: {
+    type: String,
+    required: true
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  }
 })
-const open = ref(false);
-const isLoading = ref(false);
-const emit = defineEmits(['on-edit']);
+const open = defineModel<boolean>('open', { required: true });
+const emit = defineEmits(['on-confirm']);
 </script>

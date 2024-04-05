@@ -79,33 +79,21 @@
           <FormMessage />
         </FormItem>
       </FormField>
-      <FormField
-        v-slot="{ componentField }"
-        name="when"
-      >
+      <FormField v-slot="{ componentField }" name="when">
         <FormItem class="mt-4">
-          <FormLabel>Quantas vezes por semana? (Apenas números)</FormLabel>
+          <FormLabel>Quantas vezes por semana?</FormLabel>
           <FormControl>
-            <Input
-              type="number"
-              v-bind="componentField"
-            />
+            <PillsTimesAtWeek v-bind="componentField" />
           </FormControl>
           <FormMessage />
-          <FormDescription>Ex.: 1 vez por semana, 2 vezes...</FormDescription>
+          <FormDescription>Ex.: Preciso dar 2 gotas, 3 vezes por semana...</FormDescription>
         </FormItem>
       </FormField>
-      <FormField
-        v-slot="{ componentField }"
-        name="hour"
-      >
+      <FormField v-slot="{ componentField }" name="hour">
         <FormItem class="mt-4">
           <FormLabel>{{ $t('pills.form.time') }}</FormLabel>
           <FormControl>
-            <Input
-              type="time"
-              v-bind="componentField"
-            />
+            <Input type="time" v-bind="componentField" />
           </FormControl>
           <FormDescription>{{ $t('pills.form.timeDescription') }}</FormDescription>
           <FormMessage />

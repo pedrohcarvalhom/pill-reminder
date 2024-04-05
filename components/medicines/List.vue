@@ -36,8 +36,10 @@
     </div>
 
     <CardFooter class="flex gap-2">
-      <CommonsConfirmationDialog
+      <CommonsEditAndRemoveButtons
+        :title="'Deseja excluir este remédio?'"
         :on-confirm-clicked="() => onDeleteClicked(Number(pill.id))"
+        :description="'Esta ação não poderá ser desfeita. Não é possível recuperar o seu remédio novamente.'"
         @on-edit="redirectToPill(pill.id)"
       />
     </CardFooter>

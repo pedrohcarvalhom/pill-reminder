@@ -14,7 +14,14 @@
       </div>
     </div>
     <div class="flex gap-4">
-      <PacientDropdown @on-delete="onDeleteClicked" />
+      <PacientDropdown @on-delete="open = true" />
+      <CommonsConfirmationDialog
+        v-model:open="open"
+        :title="'Deseja deletar este paciente?'"
+        :description="'Esta ação não pode ser desfeita. Todas as informações relacionadas ao paciente sera excluídas.'"
+        :loading="isLoading"
+        @on-confirm="onConfirmClicked"
+      />
     </div>
   </Card>
 </template>
@@ -32,6 +39,8 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['on-deleted']);
+const isLoading = ref(false);
+const open = ref(false);
 const { deletePacient } = usePacientService();
 
 function pluralizePill(quantity: number) {
@@ -49,8 +58,9 @@ function goToPacientPills() {
   navigateTo(`/pacient/${props.pacient.id}/pills`);
 }
 
-async function onDeleteClicked() {
+async function onConfirmClicked() {
   try {
+    isLoading.value = true;
     await deletePacient(Number(props.pacient.id));
     window.alert('Paciente deletado com sucesso!');
 
@@ -58,6 +68,9 @@ async function onDeleteClicked() {
   } catch (error) {
     console.error(error);
     window.alert("Ocorreu um erro ao deletar o paciente. Tente novamente");
+  } finally {
+    isLoading.value = false;
+    open.value = false;
   }
 }
 </script>
